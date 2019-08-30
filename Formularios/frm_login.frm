@@ -86,21 +86,21 @@ Begin VB.Form frm_login
    Begin VB.Label Label3 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
-      Caption         =   "Login"
+      Caption         =   "Iniciar Sesión"
       BeginProperty Font 
          Name            =   "Segoe UI Semibold"
-         Size            =   48
+         Size            =   36
          Charset         =   0
          Weight          =   600
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   1290
-      Left            =   4560
+      Height          =   975
+      Left            =   3600
       TabIndex        =   5
-      Top             =   960
-      Width           =   2430
+      Top             =   1320
+      Width           =   4350
    End
    Begin VB.Label Label2 
       AutoSize        =   -1  'True
