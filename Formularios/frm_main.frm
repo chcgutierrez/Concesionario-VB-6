@@ -1,7 +1,8 @@
 VERSION 5.00
-Begin VB.Form frm_main 
+Begin VB.Form frmPrincipal 
+   BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "PharmaStar"
+   Caption         =   "Concesionario"
    ClientHeight    =   7710
    ClientLeft      =   45
    ClientTop       =   330
@@ -17,7 +18,7 @@ Begin VB.Form frm_main
    Begin VB.Label Label3 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
-      Caption         =   "Main"
+      Caption         =   "principal"
       BeginProperty Font 
          Name            =   "Segoe UI Semibold"
          Size            =   48
@@ -28,21 +29,13 @@ Begin VB.Form frm_main
          Strikethrough   =   0   'False
       EndProperty
       Height          =   1290
-      Left            =   5760
+      Left            =   5160
       TabIndex        =   0
       Top             =   120
-      Width           =   2190
-   End
-   Begin VB.Image Image1 
-      Height          =   11520
-      Left            =   0
-      Picture         =   "frm_main.frx":628A
-      Stretch         =   -1  'True
-      Top             =   0
-      Width           =   16140
+      Width           =   3795
    End
 End
-Attribute VB_Name = "frm_main"
+Attribute VB_Name = "frmPrincipal"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

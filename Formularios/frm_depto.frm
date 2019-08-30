@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Begin VB.Form frm_depto 
+Begin VB.Form frmDepto 
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Maestra - Departamento"
@@ -316,7 +316,7 @@ Begin VB.Form frm_depto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "24/08/2019"
+            TextSave        =   "29/08/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -426,7 +426,7 @@ Begin VB.Form frm_depto
       Caption         =   "&Ayuda"
    End
 End
-Attribute VB_Name = "frm_depto"
+Attribute VB_Name = "frmDepto"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

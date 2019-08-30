@@ -1,5 +1,5 @@
 VERSION 5.00
-Begin VB.Form frm_login 
+Begin VB.Form frmLogin 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Iniciar Sesión"
    ClientHeight    =   5595
@@ -148,7 +148,7 @@ Begin VB.Form frm_login
       Width           =   8430
    End
 End
-Attribute VB_Name = "frm_login"
+Attribute VB_Name = "frmLogin"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
