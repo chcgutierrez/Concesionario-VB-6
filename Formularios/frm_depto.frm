@@ -8,13 +8,13 @@ Begin VB.Form frmDepto
    ClientHeight    =   5790
    ClientLeft      =   150
    ClientTop       =   720
-   ClientWidth     =   6375
+   ClientWidth     =   6390
    Icon            =   "frm_depto.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5790
-   ScaleWidth      =   6375
+   ScaleWidth      =   6390
    StartUpPosition =   2  'CenterScreen
    Begin VB.Timer Timer1 
       Left            =   3600
@@ -233,8 +233,8 @@ Begin VB.Form frmDepto
       Left            =   0
       TabIndex        =   14
       Top             =   0
-      Width           =   6375
-      _ExtentX        =   11245
+      Width           =   6390
+      _ExtentX        =   11271
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -305,8 +305,8 @@ Begin VB.Form frmDepto
       Left            =   0
       TabIndex        =   16
       Top             =   5415
-      Width           =   6375
-      _ExtentX        =   11245
+      Width           =   6390
+      _ExtentX        =   11271
       _ExtentY        =   661
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -316,7 +316,7 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "29/08/2019"
+            TextSave        =   "30/08/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -329,7 +329,7 @@ Begin VB.Form frmDepto
          EndProperty
          BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   3493
+            Object.Width           =   3519
             Key             =   "sbrPan03"
          EndProperty
          BeginProperty Panel4 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
