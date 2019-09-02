@@ -165,7 +165,7 @@ buscar
 End Sub
 
 Private Sub Form_Load()
-Abrir_tblUSUARIO
+'Abrir_tblUSUARIO
 End Sub
 
 Private Sub txt_clave_GotFocus()

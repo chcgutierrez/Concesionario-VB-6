@@ -228,22 +228,22 @@ Begin VB.Form frmTipoDoc
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
          NumButtons      =   12
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_nuevo"
+            Key             =   "btnNuevo"
             Object.Tag             =   "Nuevo"
             ImageIndex      =   1
          EndProperty
          BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_editar"
+            Key             =   "btnEditar"
             Object.ToolTipText     =   "Editar"
             ImageIndex      =   2
          EndProperty
          BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_borrar"
+            Key             =   "btnBorrar"
             Object.ToolTipText     =   "Eliminar"
             ImageIndex      =   3
          EndProperty
          BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_cancelar"
+            Key             =   "btnCancelar"
             Object.ToolTipText     =   "Cancelar"
             ImageIndex      =   4
          EndProperty
@@ -251,12 +251,12 @@ Begin VB.Form frmTipoDoc
             Style           =   3
          EndProperty
          BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_buscar"
+            Key             =   "btnBuscar"
             Object.ToolTipText     =   "Buscar"
             ImageIndex      =   5
          EndProperty
          BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_guardar"
+            Key             =   "btnGuardar"
             Object.ToolTipText     =   "Guardar"
             ImageIndex      =   6
          EndProperty
@@ -264,7 +264,7 @@ Begin VB.Form frmTipoDoc
             Style           =   3
          EndProperty
          BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_imprimir"
+            Key             =   "btnImprimir"
             Object.ToolTipText     =   "Reporte"
             ImageIndex      =   7
          EndProperty
@@ -272,7 +272,7 @@ Begin VB.Form frmTipoDoc
             Style           =   3
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_salir"
+            Key             =   "btnSalir"
             Object.ToolTipText     =   "Cerrar"
             ImageIndex      =   8
          EndProperty
@@ -299,7 +299,7 @@ Begin VB.Form frmTipoDoc
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "29/08/2019"
+            TextSave        =   "01/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -383,6 +383,30 @@ Begin VB.Form frmTipoDoc
    End
    Begin VB.Menu mnuArchivo 
       Caption         =   "&Archivo"
+      Begin VB.Menu mnuArchivo_Nuevo 
+         Caption         =   "&Nuevo"
+      End
+      Begin VB.Menu mnuArchivo_Cancelar 
+         Caption         =   "&Cancelar"
+      End
+      Begin VB.Menu mnuArchivo_Guardar 
+         Caption         =   "&Guardar"
+      End
+      Begin VB.Menu mnuArchivo_Buscar 
+         Caption         =   "&Buscar"
+      End
+      Begin VB.Menu mnuArchivo_Editar 
+         Caption         =   "&Editar"
+      End
+      Begin VB.Menu mnuArchivo_Cargar 
+         Caption         =   "&Desde &Archivo"
+      End
+      Begin VB.Menu mnuArchivo_Imprimir 
+         Caption         =   "&Imprimir"
+      End
+      Begin VB.Menu mnuArchivo_Salir 
+         Caption         =   "&Salir"
+      End
    End
    Begin VB.Menu mnuEdicion 
       Caption         =   "&Edición"
@@ -404,3 +428,48 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Sub Form_Load()
+mnuArchivo_Nuevo_Click
+End Sub
+
+Private Sub mnuArchivo_Nuevo_Click()
+On Error GoTo ControlError
+
+Me.txtTipoDoc.Text = ""
+
+Me.txtDescTipoDoc.Text = ""
+Me.txtDescTipoDoc.Enabled = False
+
+Me.txtObser.Text = ""
+Me.txtObser.Enabled = False
+
+Me.optActivo.Enabled = False
+Me.optActivo.Value = False
+
+Me.optInactivo.Enabled = False
+Me.optInactivo.Value = False
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub tlb_botones_ButtonClick(ByVal Button As MSComctlLib.Button)
+
+Select Case Button.Key
+
+        Case "btnNuevo"
+            mnuArchivo_Nuevo_Click
+        
+        Case "buscar"
+            'Para el botón Buscar
+        
+        Case "imprimir"
+            '...Etc
+
+    End Select
+
+End Sub
