@@ -134,6 +134,7 @@ Begin VB.Form frmLogin
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00000000&
       Height          =   480
       Left            =   3480
       TabIndex        =   0
@@ -141,11 +142,11 @@ Begin VB.Form frmLogin
       Width           =   1245
    End
    Begin VB.Image Image1 
-      Height          =   5610
+      Height          =   7200
       Left            =   0
       Picture         =   "frm_login.frx":058A
       Top             =   0
-      Width           =   8430
+      Width           =   12780
    End
 End
 Attribute VB_Name = "frmLogin"
@@ -174,6 +175,20 @@ End Sub
 
 Private Sub txt_clave_LostFocus()
 txt_clave.BackColor = &H80000005
+End Sub
+
+Private Sub txt_clave_Validate(Cancel As Boolean)
+
+'Variable Global en Mod_Ppal
+g_strConexion = "Provider=SQLOLEDB.1;" & _
+           "Persist Security Info=False;" & _
+           "User ID=ccgutierrezm;" & _
+           "PWD=1030538949;" & _
+           "Initial Catalog=almCarros;" & _
+           "Data Source=CLIENTE-PC;" & _
+           "PP=fc:YYYY/MM/DD@fl:YYYY/MM/DD HH:NN:SS AM/PM@+:+@isnull:IsNull@;" & _
+           "Database=almCarros;" & _
+           "AnsiNPW=no"
 End Sub
 
 Private Sub txt_usuario_GotFocus()
