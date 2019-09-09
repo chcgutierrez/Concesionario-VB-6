@@ -427,7 +427,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-bytFlagModifica As Byte
+Dim bytFlagModifica As Byte
 
 Private Sub cmdValidar_Click()
     If Me.txtTipoDoc.Text <> "" Then
