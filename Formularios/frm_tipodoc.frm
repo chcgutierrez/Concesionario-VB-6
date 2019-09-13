@@ -26,8 +26,11 @@ Begin VB.Form frmTipoDoc
       _ExtentX        =   9975
       _ExtentY        =   2566
       _Version        =   393216
+      AllowUpdate     =   0   'False
+      AllowArrows     =   -1  'True
       HeadLines       =   1
       RowHeight       =   15
+      FormatLocked    =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -46,10 +49,10 @@ Begin VB.Form frmTipoDoc
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ColumnCount     =   2
+      ColumnCount     =   6
       BeginProperty Column00 
-         DataField       =   ""
-         Caption         =   ""
+         DataField       =   "id_tipodoc"
+         Caption         =   "ID"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -61,8 +64,60 @@ Begin VB.Form frmTipoDoc
          EndProperty
       EndProperty
       BeginProperty Column01 
-         DataField       =   ""
-         Caption         =   ""
+         DataField       =   "tipo_doc"
+         Caption         =   "Tipo Doc."
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column02 
+         DataField       =   "des_tip_doc"
+         Caption         =   "Descripcion"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column03 
+         DataField       =   "est_tip_doc"
+         Caption         =   "Estado"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column04 
+         DataField       =   "fec_act"
+         Caption         =   "Modificado"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   1
+            Format          =   "dd/MM/yyyy"
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column05 
+         DataField       =   "obs_gen"
+         Caption         =   "Observaciones"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -76,8 +131,33 @@ Begin VB.Form frmTipoDoc
       SplitCount      =   1
       BeginProperty Split0 
          BeginProperty Column00 
+            ColumnAllowSizing=   0   'False
+            WrapText        =   -1  'True
+            ColumnWidth     =   1094.74
          EndProperty
          BeginProperty Column01 
+            ColumnAllowSizing=   0   'False
+            WrapText        =   -1  'True
+            ColumnWidth     =   1094.74
+         EndProperty
+         BeginProperty Column02 
+            ColumnAllowSizing=   0   'False
+            WrapText        =   -1  'True
+            ColumnWidth     =   3495.118
+         EndProperty
+         BeginProperty Column03 
+            ColumnAllowSizing=   0   'False
+            WrapText        =   -1  'True
+            ColumnWidth     =   1094.74
+         EndProperty
+         BeginProperty Column04 
+            ColumnAllowSizing=   0   'False
+            WrapText        =   -1  'True
+         EndProperty
+         BeginProperty Column05 
+            ColumnAllowSizing=   0   'False
+            WrapText        =   -1  'True
+            ColumnWidth     =   1500.095
          EndProperty
       EndProperty
    End
@@ -299,7 +379,7 @@ Begin VB.Form frmTipoDoc
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "08/09/2019"
+            TextSave        =   "12/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
