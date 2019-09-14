@@ -379,7 +379,7 @@ Begin VB.Form frmTipoDoc
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "13/09/2019"
+            TextSave        =   "14/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -520,7 +520,7 @@ End Sub
 
 Private Sub Form_Load()
     mnuArchivo_Nuevo_Click
-    PrenderMenus Me, tlb_botones, 275
+    PrenderMenus Me, tlb_botones, gcnstNuevo
 '    AbrirTipodoc
 End Sub
 
