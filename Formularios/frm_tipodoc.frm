@@ -133,22 +133,22 @@ Begin VB.Form frmTipoDoc
          BeginProperty Column00 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1094.74
+            ColumnWidth     =   1094,74
          EndProperty
          BeginProperty Column01 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1094.74
+            ColumnWidth     =   1094,74
          EndProperty
          BeginProperty Column02 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   3495.118
+            ColumnWidth     =   3495,118
          EndProperty
          BeginProperty Column03 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1094.74
+            ColumnWidth     =   1094,74
          EndProperty
          BeginProperty Column04 
             ColumnAllowSizing=   0   'False
@@ -157,7 +157,7 @@ Begin VB.Form frmTipoDoc
          BeginProperty Column05 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1500.095
+            ColumnWidth     =   1500,095
          EndProperty
       EndProperty
    End
@@ -309,7 +309,7 @@ Begin VB.Form frmTipoDoc
          NumButtons      =   12
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Key             =   "btnNuevo"
-            Object.Tag             =   "Nuevo"
+            Object.ToolTipText     =   "Nuevo"
             ImageIndex      =   1
          EndProperty
          BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
@@ -379,7 +379,7 @@ Begin VB.Form frmTipoDoc
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "12/09/2019"
+            TextSave        =   "14/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -520,7 +520,8 @@ End Sub
 
 Private Sub Form_Load()
     mnuArchivo_Nuevo_Click
-    AbrirTipodoc
+    PrenderMenus Me, tlb_botones, gcnstNuevo
+'    AbrirTipodoc
 End Sub
 
 Private Sub mnuArchivo_Buscar_Click()
