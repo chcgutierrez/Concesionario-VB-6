@@ -11,6 +11,7 @@ With ConexSQL
       "Data Source= CLIENTE-PC;"
 '      "Data Source= CLIENTE-PC;"
 'ASUSK555D\SQLEXPRESS
+frmDepto.Show
 'frmPais.Show
 End With
 ExitProc:

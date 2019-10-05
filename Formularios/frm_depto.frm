@@ -7,9 +7,10 @@ Begin VB.Form frmDepto
    Caption         =   "Maestra - Departamento"
    ClientHeight    =   5790
    ClientLeft      =   150
-   ClientTop       =   720
+   ClientTop       =   435
    ClientWidth     =   6390
    Icon            =   "frm_depto.frx":0000
+   KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -18,10 +19,10 @@ Begin VB.Form frmDepto
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox txtDesPais 
       BackColor       =   &H00C0C0C0&
+      Enabled         =   0   'False
       Height          =   315
       Left            =   2610
       TabIndex        =   16
-      Text            =   "COLOMBIA"
       Top             =   650
       Width           =   3495
    End
@@ -33,15 +34,13 @@ Begin VB.Form frmDepto
       Height          =   735
       Left            =   1755
       TabIndex        =   6
-      Text            =   "CARGA_INICIAL"
       Top             =   2700
       Width           =   4380
    End
    Begin VB.TextBox txtNomDepto 
       Height          =   315
       Left            =   1755
-      TabIndex        =   5
-      Text            =   "MEDELLIN"
+      TabIndex        =   3
       Top             =   1550
       Width           =   3735
    End
@@ -49,8 +48,7 @@ Begin VB.Form frmDepto
       Alignment       =   2  'Center
       Height          =   315
       Left            =   1755
-      TabIndex        =   3
-      Text            =   "20001"
+      TabIndex        =   1
       Top             =   1080
       Width           =   855
    End
@@ -76,14 +74,13 @@ Begin VB.Form frmDepto
       Height          =   315
       Left            =   1755
       TabIndex        =   0
-      Text            =   "10001"
       Top             =   650
       Width           =   855
    End
    Begin MSDataGridLib.DataGrid dtgDepto 
       Height          =   1455
       Left            =   375
-      TabIndex        =   7
+      TabIndex        =   9
       Top             =   3720
       Width           =   5655
       _ExtentX        =   9975
@@ -149,7 +146,7 @@ Begin VB.Form frmDepto
       Caption         =   "Inactivo"
       Height          =   315
       Left            =   2760
-      TabIndex        =   10
+      TabIndex        =   5
       Top             =   2180
       Width           =   900
    End
@@ -158,7 +155,7 @@ Begin VB.Form frmDepto
       Caption         =   "Activo"
       Height          =   315
       Left            =   1850
-      TabIndex        =   11
+      TabIndex        =   4
       Top             =   2180
       Width           =   780
    End
@@ -245,22 +242,22 @@ Begin VB.Form frmDepto
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
          NumButtons      =   12
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_nuevo"
+            Key             =   "btnNuevo"
             Object.Tag             =   "Nuevo"
             ImageIndex      =   1
          EndProperty
          BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_editar"
+            Key             =   "btnEditar"
             Object.ToolTipText     =   "Editar"
             ImageIndex      =   2
          EndProperty
          BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_borrar"
+            Key             =   "btnBorrar"
             Object.ToolTipText     =   "Eliminar"
             ImageIndex      =   3
          EndProperty
          BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_cancelar"
+            Key             =   "btnCancelar"
             Object.ToolTipText     =   "Cancelar"
             ImageIndex      =   4
          EndProperty
@@ -268,12 +265,12 @@ Begin VB.Form frmDepto
             Style           =   3
          EndProperty
          BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_buscar"
+            Key             =   "btnBuscar"
             Object.ToolTipText     =   "Buscar"
             ImageIndex      =   5
          EndProperty
          BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_guardar"
+            Key             =   "btnGuardar"
             Object.ToolTipText     =   "Guardar"
             ImageIndex      =   6
          EndProperty
@@ -281,7 +278,7 @@ Begin VB.Form frmDepto
             Style           =   3
          EndProperty
          BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_imprimir"
+            Key             =   "btnImprimir"
             Object.ToolTipText     =   "Reporte"
             ImageIndex      =   7
          EndProperty
@@ -289,7 +286,7 @@ Begin VB.Form frmDepto
             Style           =   3
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_salir"
+            Key             =   "btnSalir"
             Object.ToolTipText     =   "Cerrar"
             ImageIndex      =   8
          EndProperty
@@ -316,13 +313,14 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "20/09/2019"
+            TextSave        =   "05/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
             Alignment       =   1
             AutoSize        =   2
+            Enabled         =   0   'False
             TextSave        =   "MAYÚS"
             Key             =   "sbrPan02"
          EndProperty
@@ -369,7 +367,7 @@ Begin VB.Form frmDepto
       DataSource      =   "360"
       Height          =   195
       Left            =   600
-      TabIndex        =   9
+      TabIndex        =   11
       Top             =   2700
       Width           =   1065
    End
@@ -381,7 +379,7 @@ Begin VB.Form frmDepto
       Caption         =   "Departamento"
       Height          =   195
       Left            =   675
-      TabIndex        =   8
+      TabIndex        =   10
       Top             =   1550
       Width           =   1005
    End
@@ -393,7 +391,7 @@ Begin VB.Form frmDepto
       Caption         =   "Cod. Departamento"
       Height          =   195
       Left            =   285
-      TabIndex        =   4
+      TabIndex        =   8
       Top             =   1080
       Width           =   1380
    End
@@ -405,12 +403,36 @@ Begin VB.Form frmDepto
       Caption         =   "Pais"
       Height          =   195
       Left            =   1350
-      TabIndex        =   1
+      TabIndex        =   7
       Top             =   650
       Width           =   300
    End
    Begin VB.Menu mnuArchivo 
       Caption         =   "&Archivo"
+      Begin VB.Menu mnuArchivo_Nuevo 
+         Caption         =   "&Nuevo"
+      End
+      Begin VB.Menu mnuArchivo_Cancelar 
+         Caption         =   "&Cancelar"
+      End
+      Begin VB.Menu mnuArchivo_Guardar 
+         Caption         =   "&Guardar"
+      End
+      Begin VB.Menu mnuArchivo_Buscar 
+         Caption         =   "&Buscar"
+      End
+      Begin VB.Menu mnuArchivo_Editar 
+         Caption         =   "&Editar"
+      End
+      Begin VB.Menu mnuArchivo_Cargar 
+         Caption         =   "&Desde &Archivo"
+      End
+      Begin VB.Menu mnuArchivo_Imprimir 
+         Caption         =   "&Imprimir"
+      End
+      Begin VB.Menu mnuArchivo_Salir 
+         Caption         =   "&Salir"
+      End
    End
    Begin VB.Menu mnuEdicion 
       Caption         =   "&Edición"
@@ -431,4 +453,131 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Dim bytFlagModifica As Byte
 
+Private Sub cmdValidar_Click()
+    If Me.txtCodPais.Text <> "" And Me.txtDepto.Text <> "" Then
+        mnuArchivo_Buscar_Click
+    Else
+        MsgBox "Datos Incompletos", vbInformation + vbOKOnly, "Consultar"
+    End If
+End Sub
+
+Private Sub Form_Load()
+    mnuArchivo_Nuevo_Click
+    PrenderMenus Me, tlb_botones, gcnstConsCompleta
+End Sub
+
+Private Sub mnuArchivo_Buscar_Click()
+On Error GoTo ControlError
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_buscar_depto"
+.Parameters.Append .CreateParameter("@codPais", adVarChar, adParamInput, 10, Me.txtCodPais.Text)
+.Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
+Set rstSQL = cmdSQL.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+If rstSQL.RecordCount > 0 Then
+    If MsgBox("El registro ya existe. ¿Mostrar Datos?", vbQuestion + vbYesNo, "Consultar") = vbYes Then
+        Me.txtNomDepto.Text = rstSQL("nom_depto").Value
+            If rstSQL("est_depto").Value = "A" Then
+                Me.optActivo = True
+            Else
+                Me.optInactivo = True
+            End If
+        Me.txtObser.Text = rstSQL("obs_gen").Value
+    End If
+    Set rstSQL = Nothing
+Else
+Me.txtCodPais.Enabled = False
+Me.txtDepto.Enabled = False
+Me.cmdValidar.Enabled = False
+Me.txtNomDepto.Enabled = True
+Me.optActivo.Enabled = True
+Me.optInactivo.Enabled = True
+Me.txtObser.Enabled = True
+End If
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+
+End Sub
+
+Private Sub mnuArchivo_Nuevo_Click()
+On Error GoTo ControlError
+
+Me.txtCodPais.Text = ""
+Me.txtCodPais.Enabled = True
+Me.txtDesPais.Enabled = False
+Me.txtDepto.Text = ""
+Me.txtDepto.Enabled = True
+Me.cmdValidar.Enabled = True
+Me.txtNomDepto.Text = ""
+Me.txtNomDepto.Enabled = False
+Me.txtObser.Text = ""
+Me.txtObser.Enabled = False
+Me.optActivo.Enabled = False
+Me.optActivo.Value = False
+Me.optInactivo.Enabled = False
+Me.optInactivo.Value = False
+bytFlagModifica = 0
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+
+Private Sub txtCodPais_Validate(Cancel As Boolean)
+
+    Dim rsPais As ADODB.Recordset
+    
+    On Error GoTo ControlError
+    
+    If Len(Me.txtCodPais.Text) > 0 Then
+        Set rsPais = TraerPais(txtCodPais.Text)
+            If rsPais.RecordCount > 0 Then
+                    If rsPais("est_pais").Value = "I" Then
+                        Me.txtCodPais.SelStart = 0
+                        Me.txtCodPais.SelLength = Len(Me.txtCodPais.Text)
+                        MsgBox "El Pais ingresado está inactivo.", vbOKOnly, "Buscar Pais"
+                        Me.txtDesPais.Text = ""
+                        Cancel = True
+                        Exit Sub
+                    End If
+                Me.txtDesPais.Text = rsPais("nom_pais").Value
+            Else
+                Me.txtCodPais.SelStart = 0
+                Me.txtCodPais.SelLength = Len(Me.txtCodPais.Text)
+                MsgBox "No existe el Pais para el criterio ingresado.", vbOKOnly, "Buscar Pais"
+                Me.txtDesPais.Text = ""
+                Cancel = True
+                Exit Sub
+            End If
+    Else
+         Me.txtDesPais.Text = ""
+         MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
+         Me.txtCodPais.SetFocus
+         Cancel = True
+         Exit Sub
+    End If
+    
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+
+End Sub
