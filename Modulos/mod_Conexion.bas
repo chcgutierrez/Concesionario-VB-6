@@ -8,9 +8,10 @@ With ConexSQL
       "Integrated Security= SSPI;" & _
       "Persist Security Info= false;" & _
       "Initial Catalog= almCarros;" & _
-      "Data Source= ASUSK555D\SQLEXPRESS;"
+      "Data Source= CLIENTE-PC;"
 '      "Data Source= CLIENTE-PC;"
-frmTipoDoc.Show
+'ASUSK555D\SQLEXPRESS
+'frmPais.Show
 End With
 ExitProc:
 Exit Sub

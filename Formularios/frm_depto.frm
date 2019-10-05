@@ -16,6 +16,15 @@ Begin VB.Form frmDepto
    ScaleHeight     =   5790
    ScaleWidth      =   6390
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtDesPais 
+      BackColor       =   &H00C0C0C0&
+      Height          =   315
+      Left            =   2610
+      TabIndex        =   16
+      Text            =   "COLOMBIA"
+      Top             =   650
+      Width           =   3495
+   End
    Begin VB.Timer Timer1 
       Left            =   3600
       Top             =   1080
@@ -23,7 +32,7 @@ Begin VB.Form frmDepto
    Begin VB.TextBox txtObser 
       Height          =   735
       Left            =   1755
-      TabIndex        =   7
+      TabIndex        =   6
       Text            =   "CARGA_INICIAL"
       Top             =   2700
       Width           =   4380
@@ -31,7 +40,7 @@ Begin VB.Form frmDepto
    Begin VB.TextBox txtNomDepto 
       Height          =   315
       Left            =   1755
-      TabIndex        =   6
+      TabIndex        =   5
       Text            =   "MEDELLIN"
       Top             =   1550
       Width           =   3735
@@ -40,7 +49,7 @@ Begin VB.Form frmDepto
       Alignment       =   2  'Center
       Height          =   315
       Left            =   1755
-      TabIndex        =   4
+      TabIndex        =   3
       Text            =   "20001"
       Top             =   1080
       Width           =   855
@@ -58,7 +67,7 @@ Begin VB.Form frmDepto
       EndProperty
       Height          =   315
       Left            =   2760
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   1080
       Width           =   615
    End
@@ -66,24 +75,15 @@ Begin VB.Form frmDepto
       Alignment       =   2  'Center
       Height          =   315
       Left            =   1755
-      TabIndex        =   1
+      TabIndex        =   0
       Text            =   "10001"
       Top             =   650
       Width           =   855
    End
-   Begin VB.ComboBox cboDesPais 
-      BackColor       =   &H00C0C0C0&
-      Height          =   315
-      Left            =   2595
-      Style           =   2  'Dropdown List
-      TabIndex        =   0
-      Top             =   650
-      Width           =   3495
-   End
    Begin MSDataGridLib.DataGrid dtgDepto 
       Height          =   1455
       Left            =   375
-      TabIndex        =   8
+      TabIndex        =   7
       Top             =   3720
       Width           =   5655
       _ExtentX        =   9975
@@ -149,7 +149,7 @@ Begin VB.Form frmDepto
       Caption         =   "Inactivo"
       Height          =   315
       Left            =   2760
-      TabIndex        =   11
+      TabIndex        =   10
       Top             =   2180
       Width           =   900
    End
@@ -158,7 +158,7 @@ Begin VB.Form frmDepto
       Caption         =   "Activo"
       Height          =   315
       Left            =   1850
-      TabIndex        =   12
+      TabIndex        =   11
       Top             =   2180
       Width           =   780
    End
@@ -176,7 +176,7 @@ Begin VB.Form frmDepto
       EndProperty
       Height          =   615
       Left            =   1755
-      TabIndex        =   13
+      TabIndex        =   12
       Top             =   1950
       Width           =   2055
    End
@@ -231,7 +231,7 @@ Begin VB.Form frmDepto
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   14
+      TabIndex        =   13
       Top             =   0
       Width           =   6390
       _ExtentX        =   11271
@@ -303,7 +303,7 @@ Begin VB.Form frmDepto
       Align           =   2  'Align Bottom
       Height          =   375
       Left            =   0
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   5415
       Width           =   6390
       _ExtentX        =   11271
@@ -316,14 +316,13 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "30/08/2019"
+            TextSave        =   "20/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
             Alignment       =   1
             AutoSize        =   2
-            Enabled         =   0   'False
             TextSave        =   "MAYÚS"
             Key             =   "sbrPan02"
          EndProperty
@@ -350,7 +349,7 @@ Begin VB.Form frmDepto
       DataSource      =   "360"
       Height          =   195
       Left            =   375
-      TabIndex        =   15
+      TabIndex        =   14
       Top             =   3480
       Width           =   1185
    End
@@ -370,7 +369,7 @@ Begin VB.Form frmDepto
       DataSource      =   "360"
       Height          =   195
       Left            =   600
-      TabIndex        =   10
+      TabIndex        =   9
       Top             =   2700
       Width           =   1065
    End
@@ -382,7 +381,7 @@ Begin VB.Form frmDepto
       Caption         =   "Departamento"
       Height          =   195
       Left            =   675
-      TabIndex        =   9
+      TabIndex        =   8
       Top             =   1550
       Width           =   1005
    End
@@ -394,7 +393,7 @@ Begin VB.Form frmDepto
       Caption         =   "Cod. Departamento"
       Height          =   195
       Left            =   285
-      TabIndex        =   5
+      TabIndex        =   4
       Top             =   1080
       Width           =   1380
    End
@@ -406,7 +405,7 @@ Begin VB.Form frmDepto
       Caption         =   "Pais"
       Height          =   195
       Left            =   1350
-      TabIndex        =   2
+      TabIndex        =   1
       Top             =   650
       Width           =   300
    End

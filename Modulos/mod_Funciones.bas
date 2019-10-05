@@ -31,7 +31,7 @@ Public Enum TipoAccionMenu
    gcnstGuardar = cnstMnuNuevo + cnstMnuEditar + cnstMnuBorrar + cnstMnuBuscar + cnstMnuImprimir + cnstMnuCerrar    ' habilita Nuevo, Modificar, Eliminar, Consultar, Imprimir y Salir
    gcnstCargar = cnstMnuCancelar + cnstMnuCerrar + cnstMnuBuscar + cnstMnuCargar                                                    ' habilita Cancelar, Salir y Buscar
    gcnstBuscarImprimir = cnstMnuCancelar + cnstMnuCerrar + cnstMnuBuscar + cnstMnuImprimir                                                      ' habilita Cancelar, Salir y Buscar
-   gcnstConsCompleta = cnstMnuNuevo + cnstMnuEditar + cnstMnuBorrar + cnstMnuCancelar + cnstMnuImprimir + cnstMnuCerrar ' habilita Nuevo, Modificar, Eliminar, Cancelar, Imprimir y Salir
+   gcnstConsCompleta = cnstMnuNuevo + cnstMnuEditar + cnstMnuGuardar + cnstMnuBorrar + cnstMnuCancelar + cnstMnuImprimir + cnstMnuCerrar ' habilita Nuevo, Modificar, Eliminar, Cancelar, Imprimir y Salir
    gcnstBuscar = cnstMnuEditar + cnstMnuBorrar + cnstMnuCancelar + cnstMnuImprimir + cnstMnuCerrar                    ' habilita Modificar, Eliminar, Cancelar, Imprimir y Salir
    gcnstCerrar = cnstMnuCerrar                                                                                          ' habilita salir
    gcnstNada = 0                                                                                                  ' No habilita ninguno
@@ -74,9 +74,8 @@ Public Sub PrenderMenus(ByVal Formulario As Object, ByVal tlbFormulario As Toolb
 1210      End With
 1220   End If
 1230   Exit Sub
-ErrorHandler:
-1240   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & Err.Number & _
+ControlError:
+1240   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error:" & Err.Description, vbCritical, App.Title
 End Sub
-
 

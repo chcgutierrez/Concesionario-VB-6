@@ -22,7 +22,6 @@ Begin VB.Form frmPais
       Height          =   315
       Left            =   1515
       TabIndex        =   6
-      Text            =   "10001"
       Top             =   600
       Width           =   855
    End
@@ -30,7 +29,6 @@ Begin VB.Form frmPais
       Height          =   315
       Left            =   1515
       TabIndex        =   5
-      Text            =   "COLOMBIA"
       Top             =   1050
       Width           =   3735
    End
@@ -73,7 +71,6 @@ Begin VB.Form frmPais
       Height          =   735
       Left            =   1560
       TabIndex        =   1
-      Text            =   "CARGA_INICIAL"
       Top             =   2280
       Width           =   4380
    End
@@ -92,6 +89,7 @@ Begin VB.Form frmPais
       _Version        =   393216
       HeadLines       =   1
       RowHeight       =   15
+      FormatLocked    =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -110,10 +108,10 @@ Begin VB.Form frmPais
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ColumnCount     =   2
+      ColumnCount     =   5
       BeginProperty Column00 
-         DataField       =   ""
-         Caption         =   ""
+         DataField       =   "cod_pais"
+         Caption         =   "Código"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -125,8 +123,47 @@ Begin VB.Form frmPais
          EndProperty
       EndProperty
       BeginProperty Column01 
-         DataField       =   ""
-         Caption         =   ""
+         DataField       =   "nom_pais"
+         Caption         =   "Nombre"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column02 
+         DataField       =   "est_pais"
+         Caption         =   "Estado"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column03 
+         DataField       =   "fec_act"
+         Caption         =   "Modificado"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   3082
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column04 
+         DataField       =   "obs_gen"
+         Caption         =   "Observaciones"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -142,6 +179,12 @@ Begin VB.Form frmPais
          BeginProperty Column00 
          EndProperty
          BeginProperty Column01 
+         EndProperty
+         BeginProperty Column02 
+         EndProperty
+         BeginProperty Column03 
+         EndProperty
+         BeginProperty Column04 
          EndProperty
       EndProperty
    End
@@ -209,7 +252,7 @@ Begin VB.Form frmPais
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "29/08/2019"
+            TextSave        =   "20/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -270,22 +313,22 @@ Begin VB.Form frmPais
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
          NumButtons      =   12
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_nuevo"
+            Key             =   "btnNuevo"
             Object.Tag             =   "Nuevo"
             ImageIndex      =   1
          EndProperty
          BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_editar"
+            Key             =   "btnEditar"
             Object.ToolTipText     =   "Editar"
             ImageIndex      =   2
          EndProperty
          BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_borrar"
+            Key             =   "btnBorrar"
             Object.ToolTipText     =   "Eliminar"
             ImageIndex      =   3
          EndProperty
          BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_cancelar"
+            Key             =   "btnCancelar"
             Object.ToolTipText     =   "Cancelar"
             ImageIndex      =   4
          EndProperty
@@ -293,12 +336,12 @@ Begin VB.Form frmPais
             Style           =   3
          EndProperty
          BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_buscar"
+            Key             =   "btnBuscar"
             Object.ToolTipText     =   "Buscar"
             ImageIndex      =   5
          EndProperty
          BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_guardar"
+            Key             =   "btnGuardar"
             Object.ToolTipText     =   "Guardar"
             ImageIndex      =   6
          EndProperty
@@ -306,7 +349,7 @@ Begin VB.Form frmPais
             Style           =   3
          EndProperty
          BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_imprimir"
+            Key             =   "btnImprimir"
             Object.ToolTipText     =   "Reporte"
             ImageIndex      =   7
          EndProperty
@@ -314,7 +357,7 @@ Begin VB.Form frmPais
             Style           =   3
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Key             =   "btn_salir"
+            Key             =   "btnSalir"
             Object.ToolTipText     =   "Cerrar"
             ImageIndex      =   8
          EndProperty
@@ -383,6 +426,30 @@ Begin VB.Form frmPais
    End
    Begin VB.Menu mnuArchivo 
       Caption         =   "&Archivo"
+      Begin VB.Menu mnuArchivo_Nuevo 
+         Caption         =   "&Nuevo"
+      End
+      Begin VB.Menu mnuArchivo_Cancelar 
+         Caption         =   "&Cancelar"
+      End
+      Begin VB.Menu mnuArchivo_Guardar 
+         Caption         =   "&Guardar"
+      End
+      Begin VB.Menu mnuArchivo_Buscar 
+         Caption         =   "&Buscar"
+      End
+      Begin VB.Menu mnuArchivo_Editar 
+         Caption         =   "&Editar"
+      End
+      Begin VB.Menu mnuArchivo_Cargar 
+         Caption         =   "&Desde &Archivo"
+      End
+      Begin VB.Menu mnuArchivo_Imprimir 
+         Caption         =   "&Imprimir"
+      End
+      Begin VB.Menu mnuArchivo_Salir 
+         Caption         =   "&Salir"
+      End
    End
    Begin VB.Menu mnuEdicion 
       Caption         =   "&Edición"
@@ -403,4 +470,233 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Dim bytFlagModifica As Byte
+
+Private Sub cmdValidar_Click()
+    If Me.txtCodPais.Text <> "" Then
+        mnuArchivo_Buscar_Click
+    Else
+        MsgBox "Debe ingresar un criterio", vbInformation + vbOKOnly, "Consultar"
+        Me.txtCodPais.SetFocus
+    End If
+End Sub
+
+Private Sub Form_Load()
+    mnuArchivo_Nuevo_Click
+    PrenderMenus Me, tlb_botones, gcnstConsCompleta
+    AbrirPais
+End Sub
+
+Private Sub mnuArchivo_Buscar_Click()
+On Error GoTo ControlError
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_buscar_pais"
+.Parameters.Refresh
+    .Parameters("@cod_pais").Value = Me.txtCodPais.Text
+Set rstSQL = cmdSQL.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+If rstSQL.RecordCount > 0 Then
+    If MsgBox("El registro ya existe. ¿Mostrar Datos?", vbQuestion + vbYesNo, "Consultar") = vbYes Then
+        Me.txtNomPais.Text = rstSQL("nom_pais").Value
+            If rstSQL("est_pais").Value = "A" Then
+                Me.optActivo = True
+            Else
+                Me.optInactivo = True
+            End If
+        Me.txtObser.Text = rstSQL("obs_gen").Value
+    End If
+    Set rstSQL = Nothing
+Else
+Me.txtCodPais.Enabled = False
+Me.cmdValidar.Enabled = False
+Me.txtNomPais.Enabled = True
+Me.optActivo.Enabled = True
+Me.optInactivo.Enabled = True
+Me.txtObser.Enabled = True
+End If
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub mnuArchivo_Cancelar_Click()
+On Error GoTo ControlError
+
+Me.txtCodPais.Enabled = False
+Me.txtNomPais.Enabled = False
+Me.optActivo.Enabled = False
+Me.optInactivo.Enabled = False
+Me.txtObser.Enabled = False
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub mnuArchivo_Editar_Click()
+On Error GoTo ControlError
+
+Me.txtCodPais.Enabled = False
+Me.cmdValidar.Enabled = False
+Me.txtNomPais.Enabled = True
+Me.optActivo.Enabled = True
+Me.optInactivo.Enabled = True
+Me.txtObser.Enabled = True
+bytFlagModifica = 1
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub mnuArchivo_Guardar_Click()
+On Error GoTo ControlError
+
+Dim estPais As String
+
+If Me.optActivo = True Then
+estPais = "A"
+ElseIf Me.optInactivo = True Then
+estPais = "I"
+End If
+
+If bytFlagModifica = 0 Then
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_guardar_pais"
+.Parameters.Refresh
+    .Parameters("@cod_pais").Value = Me.txtCodPais.Text
+    .Parameters("@nom_pais").Value = Me.txtNomPais.Text
+    .Parameters("@est_pais").Value = estPais
+    .Parameters("@obs_gen").Value = Me.txtObser.Text
+.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+mnuArchivo_Cancelar_Click
+MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+AbrirPais
+
+Else
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_editar_pais"
+.Parameters.Refresh
+    .Parameters("@cod_pais").Value = Me.txtCodPais.Text
+    .Parameters("@nom_pais").Value = Me.txtNomPais.Text
+    .Parameters("@est_pais").Value = estPais
+    .Parameters("@obs_gen").Value = Me.txtObser.Text
+.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+mnuArchivo_Cancelar_Click
+MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+AbrirPais
+
+End If
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub mnuArchivo_Nuevo_Click()
+
+On Error GoTo ControlError
+
+Me.txtCodPais.Text = ""
+Me.txtCodPais.Enabled = True
+Me.cmdValidar.Enabled = True
+Me.txtNomPais.Text = ""
+Me.txtNomPais.Enabled = False
+Me.txtObser.Text = ""
+Me.txtObser.Enabled = False
+Me.optActivo.Enabled = False
+Me.optActivo.Value = False
+Me.optInactivo.Enabled = False
+Me.optInactivo.Value = False
+bytFlagModifica = 0
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+
+End Sub
+
+Private Sub mnuArchivo_Salir_Click()
+    If MsgBox("¿Cerrar el Formulario?", vbQuestion + vbYesNo, "Cerrar") = vbYes Then
+        Unload Me
+    End If
+End Sub
+
+Private Sub tlb_botones_ButtonClick(ByVal Button As MSComctlLib.Button)
+
+    Select Case Button.Key
+
+        Case "btnNuevo": mnuArchivo_Nuevo_Click
+        
+        Case "btnEditar": mnuArchivo_Editar_Click
+        
+        Case "btnGuardar": mnuArchivo_Guardar_Click
+        
+        Case "btnSalir": mnuArchivo_Salir_Click
+
+    End Select
+
+End Sub
+
+Private Sub AbrirPais()
+
+On Error GoTo ControlError
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_mostrar_pais"
+    With rstSQL
+        If .State = 1 Then .Close
+        Set rstSQL = cmdSQL.Execute
+        Set Me.dtgPais.DataSource = rstSQL
+    End With
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+Set rstSQL = Nothing
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+
+End Sub
 

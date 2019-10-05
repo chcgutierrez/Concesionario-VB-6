@@ -10,6 +10,7 @@ Begin VB.Form frmTipoDoc
    ClientTop       =   435
    ClientWidth     =   6285
    Icon            =   "frm_tipodoc.frx":0000
+   KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    LockControls    =   -1  'True
    MaxButton       =   0   'False
@@ -133,22 +134,22 @@ Begin VB.Form frmTipoDoc
          BeginProperty Column00 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1094,74
+            ColumnWidth     =   1094.74
          EndProperty
          BeginProperty Column01 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1094,74
+            ColumnWidth     =   1094.74
          EndProperty
          BeginProperty Column02 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   3495,118
+            ColumnWidth     =   3495.118
          EndProperty
          BeginProperty Column03 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1094,74
+            ColumnWidth     =   1094.74
          EndProperty
          BeginProperty Column04 
             ColumnAllowSizing=   0   'False
@@ -157,7 +158,7 @@ Begin VB.Form frmTipoDoc
          BeginProperty Column05 
             ColumnAllowSizing=   0   'False
             WrapText        =   -1  'True
-            ColumnWidth     =   1500,095
+            ColumnWidth     =   1500.095
          EndProperty
       EndProperty
    End
@@ -379,7 +380,7 @@ Begin VB.Form frmTipoDoc
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "14/09/2019"
+            TextSave        =   "20/09/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -520,8 +521,8 @@ End Sub
 
 Private Sub Form_Load()
     mnuArchivo_Nuevo_Click
-    PrenderMenus Me, tlb_botones, gcnstNuevo
-'    AbrirTipodoc
+    PrenderMenus Me, tlb_botones, gcnstConsCompleta
+    AbrirTipodoc
 End Sub
 
 Private Sub mnuArchivo_Buscar_Click()
@@ -582,6 +583,25 @@ MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr
 Resume ExitProc
 End Sub
 
+Private Sub mnuArchivo_Editar_Click()
+On Error GoTo ControlError
+
+Me.txtTipoDoc.Enabled = False
+Me.cmdValidar.Enabled = False
+Me.txtDescTipoDoc.Enabled = True
+Me.txtObser.Enabled = True
+Me.optActivo.Enabled = True
+Me.optInactivo.Enabled = True
+bytFlagModifica = 1
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
 Private Sub mnuArchivo_Guardar_Click()
 On Error GoTo ControlError
 
@@ -592,6 +612,8 @@ estTipoDoc = "A"
 ElseIf Me.optInactivo = True Then
 estTipoDoc = "I"
 End If
+
+If bytFlagModifica = 0 Then
 
 With cmdSQL
 .ActiveConnection = ConexSQL
@@ -610,6 +632,29 @@ Set cmdSQL.ActiveConnection = Nothing
 mnuArchivo_Cancelar_Click
 MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
 AbrirTipodoc
+
+Else
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_editar_tipodoc"
+.Parameters.Refresh
+    .Parameters("@tipo_doc").Value = Me.txtTipoDoc.Text
+    .Parameters("@des_tip_doc").Value = Me.txtDescTipoDoc.Text
+    .Parameters("@est_tip_doc").Value = estTipoDoc
+    .Parameters("@obs_gen").Value = Me.txtObser.Text
+.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+mnuArchivo_Cancelar_Click
+MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+AbrirTipodoc
+
+End If
+
 ExitProc:
 Exit Sub
 ControlError:
@@ -633,6 +678,7 @@ Me.optActivo.Enabled = False
 Me.optActivo.Value = False
 Me.optInactivo.Enabled = False
 Me.optInactivo.Value = False
+bytFlagModifica = 0
 
 ExitProc:
 Exit Sub
@@ -654,6 +700,8 @@ Private Sub tlb_botones_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Key
 
         Case "btnNuevo": mnuArchivo_Nuevo_Click
+        
+        Case "btnEditar": mnuArchivo_Editar_Click
         
         Case "btnGuardar": mnuArchivo_Guardar_Click
         
