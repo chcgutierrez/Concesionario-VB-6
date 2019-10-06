@@ -88,6 +88,7 @@ Begin VB.Form frmDepto
       _Version        =   393216
       HeadLines       =   1
       RowHeight       =   15
+      FormatLocked    =   -1  'True
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "MS Sans Serif"
          Size            =   8.25
@@ -106,10 +107,10 @@ Begin VB.Form frmDepto
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ColumnCount     =   2
+      ColumnCount     =   6
       BeginProperty Column00 
-         DataField       =   ""
-         Caption         =   ""
+         DataField       =   "cod_pais"
+         Caption         =   "Cod Pais"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -121,8 +122,60 @@ Begin VB.Form frmDepto
          EndProperty
       EndProperty
       BeginProperty Column01 
-         DataField       =   ""
-         Caption         =   ""
+         DataField       =   "cod_depto"
+         Caption         =   "Cod. Depto"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   9226
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column02 
+         DataField       =   "nom_depto"
+         Caption         =   "Nombre Depto"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   9226
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column03 
+         DataField       =   "est_depto"
+         Caption         =   "Estado"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   9226
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column04 
+         DataField       =   "fec_act"
+         Caption         =   "Fecha"
+         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+            Type            =   0
+            Format          =   ""
+            HaveTrueFalseNull=   0
+            FirstDayOfWeek  =   0
+            FirstWeekOfYear =   0
+            LCID            =   9226
+            SubFormatType   =   0
+         EndProperty
+      EndProperty
+      BeginProperty Column05 
+         DataField       =   "obs_gen"
+         Caption         =   "Obervaciones"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -138,6 +191,14 @@ Begin VB.Form frmDepto
          BeginProperty Column00 
          EndProperty
          BeginProperty Column01 
+         EndProperty
+         BeginProperty Column02 
+         EndProperty
+         BeginProperty Column03 
+         EndProperty
+         BeginProperty Column04 
+         EndProperty
+         BeginProperty Column05 
          EndProperty
       EndProperty
    End
@@ -464,6 +525,7 @@ Private Sub cmdValidar_Click()
 End Sub
 
 Private Sub Form_Load()
+    AbrirDepto
     mnuArchivo_Nuevo_Click
     PrenderMenus Me, tlb_botones, gcnstConsCompleta
 End Sub
@@ -511,12 +573,121 @@ Resume ExitProc
 
 End Sub
 
+Private Sub mnuArchivo_Cancelar_Click()
+On Error GoTo ControlError
+
+Me.txtCodPais.Enabled = False
+Me.txtDepto.Enabled = False
+Me.txtNomDepto.Enabled = False
+Me.optActivo.Enabled = False
+Me.optInactivo.Enabled = False
+Me.txtObser.Enabled = False
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub mnuArchivo_Editar_Click()
+On Error GoTo ControlError
+
+Me.txtCodPais.Enabled = False
+Me.txtDepto.Enabled = False
+Me.cmdValidar.Enabled = False
+Me.txtNomDepto.Enabled = True
+Me.optActivo.Enabled = True
+Me.optInactivo.Enabled = True
+Me.txtObser.Enabled = True
+bytFlagModifica = 1
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub mnuArchivo_Guardar_Click()
+
+Dim estDepto As String
+Dim rsPais As ADODB.Recordset
+
+On Error GoTo ControlError
+
+If Me.optActivo = True Then
+estDepto = "A"
+ElseIf Me.optInactivo = True Then
+estDepto = "I"
+End If
+
+    If Len(Me.txtCodPais.Text) > 0 Then
+        Set rsPais = TraerPais(txtCodPais.Text)
+    End If
+
+If bytFlagModifica = 0 Then
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_guardar_depto"
+    .Parameters.Append .CreateParameter("@idPais", adInteger, adParamInput, 10, rsPais("id_pais").Value)
+    .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
+    .Parameters.Append .CreateParameter("@nomDepto", adVarChar, adParamInput, 100, Me.txtNomDepto.Text)
+    .Parameters.Append .CreateParameter("@estDepto", adVarChar, adParamInput, 10, estDepto)
+    .Parameters.Append .CreateParameter("@obsGen", adVarChar, adParamInput, 100, Me.txtObser.Text)
+.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+mnuArchivo_Cancelar_Click
+MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+AbrirDepto
+
+Else
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_editar_depto"
+    .Parameters.Append .CreateParameter("@idPais", adInteger, adParamInput, 10, rsPais("id_pais").Value)
+    .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
+    .Parameters.Append .CreateParameter("@nomDepto", adVarChar, adParamInput, 100, Me.txtNomDepto.Text)
+    .Parameters.Append .CreateParameter("@estDepto", adVarChar, adParamInput, 10, estDepto)
+    .Parameters.Append .CreateParameter("@obsGen", adVarChar, adParamInput, 100, Me.txtObser.Text)
+.Execute
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+mnuArchivo_Cancelar_Click
+MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+AbrirDepto
+
+End If
+
+Set rsPais = Nothing
+
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+
 Private Sub mnuArchivo_Nuevo_Click()
 On Error GoTo ControlError
 
 Me.txtCodPais.Text = ""
 Me.txtCodPais.Enabled = True
 Me.txtDesPais.Enabled = False
+Me.txtDesPais.Text = ""
 Me.txtDepto.Text = ""
 Me.txtDepto.Enabled = True
 Me.cmdValidar.Enabled = True
@@ -538,6 +709,25 @@ MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr
 Resume ExitProc
 End Sub
 
+Private Sub mnuArchivo_Salir_Click()
+    If MsgBox("¿Cerrar el Formulario?", vbQuestion + vbYesNo, "Cerrar") = vbYes Then
+        Unload Me
+    End If
+End Sub
+
+Private Sub tlb_botones_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Key
+
+        Case "btnNuevo": mnuArchivo_Nuevo_Click
+        
+        Case "btnEditar": mnuArchivo_Editar_Click
+        
+        Case "btnGuardar": mnuArchivo_Guardar_Click
+        
+        Case "btnSalir": mnuArchivo_Salir_Click
+
+    End Select
+End Sub
 
 Private Sub txtCodPais_Validate(Cancel As Boolean)
 
@@ -580,4 +770,29 @@ MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
 Resume ExitProc
 
+End Sub
+
+Private Sub AbrirDepto()
+On Error GoTo ControlError
+
+With cmdSQL
+.ActiveConnection = ConexSQL
+.CommandType = adCmdStoredProc
+.CommandText = "sp_mostrar_depto"
+    With rstSQL
+        If .State = 1 Then .Close
+        Set rstSQL = cmdSQL.Execute
+        Set Me.dtgDepto.DataSource = rstSQL
+    End With
+End With
+Set cmdSQL = Nothing
+Set cmdSQL.ActiveConnection = Nothing
+'cmdSQL.ActiveConnection.Close
+Set rstSQL = Nothing
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
 End Sub

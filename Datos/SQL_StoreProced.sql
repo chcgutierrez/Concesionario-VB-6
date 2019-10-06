@@ -231,7 +231,7 @@ insert into tb_depto values('105','3021','LA GUAJIRA','A',GETDATE(),'CARGA_SQL')
 insert into tb_depto values('105','3022','MAGDALENA','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3023','META','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3024','NARIÑO','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3025','NORTE','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3025','NORTE DE SANTANDER','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3026','PUTUMAYO','I',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3027','QUINDÍO','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3028','SAN ANDRÉS Y PROVIDENCIA','A',GETDATE(),'CARGA_SQL');
@@ -240,3 +240,60 @@ insert into tb_depto values('105','3030','SUCRE','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3031','VALLE','I',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3032','VAUPÉS','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3033','VICHADA','A',GETDATE(),'CARGA_SQL');
+
+/*=====================================================================
+Nombre: sp_mostrar_depto
+Objetivo: Mostrar los registros existentes en la tabla tb_depto
+Fecha Creacion: 05/10/2019
+Autor: chcgutierrez
+=======================================================================*/
+create proc sp_mostrar_depto
+as
+select
+B.cod_pais,
+A.cod_depto,
+A.nom_depto,
+A.est_depto,
+A.fec_act,
+A.obs_gen
+from
+	tb_depto A (nolock) inner join tb_pais B (nolock)
+		on B.id_pais = A.id_pais
+
+/*=====================================================================
+Nombre: sp_guardar_depto
+Objetivo: Insertar registros en la tabla tb_depto
+Fecha Creacion: 05/10/2019
+Autor: chcgutierrez
+=======================================================================*/
+create proc sp_guardar_depto
+@idPais varchar (10),
+@codDepto varchar (10),
+@nomDepto varchar (100),
+@estDepto varchar (10),
+@obsGen text
+as
+insert into tb_depto (id_pais, cod_depto, nom_depto, est_depto, fec_act, obs_gen)
+	values(@idPais, @codDepto, @nomDepto, @estDepto, getdate(), @obsGen)
+
+/*=====================================================================
+Nombre: sp_editar_depto
+Objetivo: Actualizar el registro en la tabla tb_pais segun criterio
+Fecha Creacion: 10/05/2019
+Autor: chcgutierrez
+=======================================================================*/
+alter proc sp_editar_depto
+@codPais varchar (10),
+@codDepto varchar (10),
+@nomDepto varchar (100),
+@estDepto varchar (10),
+@obsDepto text
+as
+update tb_depto set nom_depto = @nomDepto,
+				    est_depto = @estDepto,
+				    fec_act = getdate(),
+				    obs_gen = @obsDepto where
+				    id_pais = @codPais and
+					cod_depto = @codDepto
+
+select * from tb_depto
