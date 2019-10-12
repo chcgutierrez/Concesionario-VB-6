@@ -282,7 +282,7 @@ Objetivo: Actualizar el registro en la tabla tb_pais segun criterio
 Fecha Creacion: 10/05/2019
 Autor: chcgutierrez
 =======================================================================*/
-alter proc sp_editar_depto
+create procedure sp_editar_depto
 @codPais varchar (10),
 @codDepto varchar (10),
 @nomDepto varchar (100),
@@ -296,4 +296,101 @@ update tb_depto set nom_depto = @nomDepto,
 				    id_pais = @codPais and
 					cod_depto = @codDepto
 
+
+select * from tb_pais
 select * from tb_depto
+select * from tb_ciudad
+
+INSERT INTO tb_ciudad VALUES ('101','105','4001','ABEJORRAL','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4002','ABRIAQUÍ','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4003','ALEJANDRÍA','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4004','AMAGÁ','I',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4005','AMALFI','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4006','ANDES','I',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4007','ANGELÓPOLIS','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4008','ANGOSTURA','I',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4009','ANORÍ','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4010','ANZA','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4011','APARTADÓ','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4012','ARBOLETES','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4013','ARGELIA','I',GETDATE(),'CARGA_SQL');
+
+/*
+=========================================================================
+Tabla Ciudad
+tb_ciudad
+=========================================================================
+*/
+
+/*=====================================================================
+Nombre: sp_buscar_ciudad
+Objetivo: Buscar el registro en la tabla tb_depto segun criterios
+Fecha Creacion: 05/10/2019
+Autor: chcgutierrez
+=======================================================================*/
+create proc sp_buscar_ciudad
+@codPais varchar (10),
+@codDepto varchar (10),
+@codCiudad varchar (10)
+as
+select
+A.id_ciudad,
+A.id_depto,
+A.id_pais,
+B.cod_depto,
+C.cod_pais,
+A.cod_ciudad,
+A.nom_ciu,
+A.est_ciu,
+A.fec_act,
+A.obs_gen
+from
+	tb_ciudad A (nolock) inner join tb_depto B (nolock)
+		on B.id_depto = A.id_depto
+		inner join tb_pais C (nolock)
+		on B.id_pais = A.id_pais
+where
+B.cod_depto = @codDepto and
+C.cod_pais = @codPais and
+A.cod_ciudad = @codCiudad
+
+/*=====================================================================
+Nombre: sp_guardar_ciudad
+Objetivo: Insertar registros en la tabla tb_ciudad
+Fecha Creacion: 05/10/2019
+Autor: chcgutierrez
+=======================================================================*/
+create proc sp_guardar_ciudad
+@idDepto varchar (10),
+@idPais varchar (10),
+@codCiudad varchar (10),
+@nomCiudad varchar (100),
+@estCiudad varchar (10),
+@obsGen text
+as
+insert into tb_ciudad (id_depto, id_pais, cod_ciudad, nom_ciu, est_ciu, fec_act, obs_gen)
+	values(@idDepto, @idPais, @codCiudad, @nomCiudad, @estCiudad, getdate(), @obsGen)
+
+/*=====================================================================
+Nombre: sp_editar_ciudad
+Objetivo: Actualizar el registro en la tabla tb_ciudad segun criterio
+Fecha Creacion: 10/05/2019
+Autor: chcgutierrez
+=======================================================================*/
+create procedure sp_editar_ciudad
+@codDepto varchar (10),
+@codPais varchar (10),
+@codCiudad varchar (10),
+@nomCiudad varchar (100),
+@estCiudad varchar (10),
+@obsCiudad text
+as
+update tb_ciudad set nom_ciu = @nomCiudad,
+				    est_ciu = @estCiudad,
+				    fec_act = getdate(),
+				    obs_gen = @obsCiudad where
+					id_depto = @codDepto and
+				    id_pais = @codPais and
+					cod_ciudad = @codCiudad
+
+select * from tb_tipodoc
