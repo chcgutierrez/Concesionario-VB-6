@@ -111,7 +111,7 @@ Begin VB.Form frmPais
       ColumnCount     =   5
       BeginProperty Column00 
          DataField       =   "cod_pais"
-         Caption         =   "Código"
+         Caption         =   "Cï¿½digo"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -252,7 +252,7 @@ Begin VB.Form frmPais
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "20/09/2019"
+            TextSave        =   "16/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -260,7 +260,7 @@ Begin VB.Form frmPais
             Alignment       =   1
             AutoSize        =   2
             Enabled         =   0   'False
-            TextSave        =   "MAYÚS"
+            TextSave        =   "MAYï¿½S"
             Key             =   "sbrPan02"
          EndProperty
          BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -698,5 +698,9 @@ MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
 Resume ExitProc
 
+End Sub
+
+Private Sub txtCodPais_DblClick()
+    frm_bPais.Show vbModal
 End Sub
 

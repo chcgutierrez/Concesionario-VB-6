@@ -329,14 +329,15 @@ Begin VB.Form frmCiudad
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "11/10/2019"
+            TextSave        =   "16/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
             Alignment       =   1
             AutoSize        =   2
-            TextSave        =   "MAYÚS"
+            Enabled         =   0   'False
+            TextSave        =   "MAYï¿½S"
             Key             =   "sbrPan02"
          EndProperty
          BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -758,6 +759,10 @@ ControlError:
 MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
 Resume ExitProc
+End Sub
+
+Private Sub txtCodPais_DblClick()
+    frm_bPais.Show vbModal
 End Sub
 
 Private Sub txtCodPais_Validate(Cancel As Boolean)

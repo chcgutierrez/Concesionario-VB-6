@@ -19,7 +19,7 @@ Public Const m_ColorNuevo As Long = &HFFF6F0
 Public Const m_ColorExistente As Long = vbWhite
 
 '***************************************************************************************
-'Acciones para combinar con cada boton y menu y asi habilitar o no
+'Acciones para combinar con cada boton y menu y activar o no
 '***************************************************************************************
 Public Enum TipoAccionMenu
    gcnstReporte = cnstMnuImprimir + cnstMnuGuardar + cnstMnuNuevo + cnstMnuCerrar                                         'Habilita Nuevo, Guardar, Imprimir y Salir
@@ -122,6 +122,30 @@ Public Function TraerDepto(ByVal strCodPais As String, ByVal strCodDepto As Stri
             .ActiveConnection = Nothing
         End With
     Set TraerDepto = rsAux
+    Exit Function
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+End Function
+
+Public Function TraerPaisDesc(ByVal strDescPais As String, Optional ByRef o_lError As Long) As ADODB.Recordset
+
+    Dim rsAux As ADODB.Recordset
+    Dim cmdSQL As New ADODB.Command
+       
+    On Error GoTo ControlError
+       
+    Set rsAux = New ADODB.Recordset
+    rsAux.CursorLocation = adUseClient 'soy cliente de la bd
+        With cmdSQL
+            .ActiveConnection = ConexSQL
+            .CommandType = adCmdStoredProc
+            .CommandText = "sp_buscar_pais_desc"
+            .Parameters.Append .CreateParameter("@desc_pais", adVarChar, adParamInput, 120, strDescPais)
+            Set rsAux = cmdSQL.Execute
+            .ActiveConnection = Nothing
+        End With
+    Set TraerPaisDesc = rsAux
     Exit Function
 ControlError:
 MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _

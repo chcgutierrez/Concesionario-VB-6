@@ -164,7 +164,7 @@ INSERT INTO tb_pais VALUES ('2005','COLOMBIA','A','2019-09-01','CARGA_INICIAL');
 INSERT INTO tb_pais VALUES ('2006','ECUADOR','A','2019-09-01','CARGA_INICIAL');
 INSERT INTO tb_pais VALUES ('2007','GUYANA','I','2019-09-07','CARGA_INICIAL');
 INSERT INTO tb_pais VALUES ('2008','PARAGUAY','A','2019-09-08','CARGA_INICIAL');
-INSERT INTO tb_pais VALUES ('2009','PERÚ','A','2019-09-01','CARGA_INICIAL');
+INSERT INTO tb_pais VALUES ('2009','PERï¿½','A','2019-09-01','CARGA_INICIAL');
 INSERT INTO tb_pais VALUES ('2010','SURINAM','I','2019-09-01','CARGA_INICIAL');
 INSERT INTO tb_pais VALUES ('2011','URUGUAY','A','2019-09-11','CARGA_INICIAL');
 INSERT INTO tb_pais VALUES ('2012','VENEZUELA','I','2019-09-12','CARGA_INICIAL');
@@ -214,31 +214,31 @@ insert into tb_depto values('105','3004','CUNDINAMARCA','A',getdate(),'CARGA_SQL
 insert into tb_depto values('105','3005','ATLANTICO','A',getdate(),'CARGA_SQL')
 insert into tb_depto values('105','3006','AMAZONAS','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3007','ARAUCA','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3008','BOGOTÁ','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3009','BOLÍVAR','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3010','BOYACÁ','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3008','BOGOTï¿½','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3009','BOLï¿½VAR','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3010','BOYACï¿½','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3011','CALDAS','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3012','CAQUETÁ','I',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3012','CAQUETï¿½','I',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3013','CASANARE','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3014','CAUCA','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3015','CESAR','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3016','CHOCÓ','I',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3017','CÓRDOBA','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3018','GUAINÍA','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3016','CHOCï¿½','I',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3017','Cï¿½RDOBA','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3018','GUAINï¿½A','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3019','GUAVIARE','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3020','HUILA','I',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3021','LA GUAJIRA','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3022','MAGDALENA','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3023','META','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3024','NARIÑO','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3024','NARIï¿½O','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3025','NORTE DE SANTANDER','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3026','PUTUMAYO','I',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3027','QUINDÍO','A',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3028','SAN ANDRÉS Y PROVIDENCIA','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3027','QUINDï¿½O','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3028','SAN ANDRï¿½S Y PROVIDENCIA','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3029','SANTANDER','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3030','SUCRE','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3031','VALLE','I',GETDATE(),'CARGA_SQL');
-insert into tb_depto values('105','3032','VAUPÉS','A',GETDATE(),'CARGA_SQL');
+insert into tb_depto values('105','3032','VAUPï¿½S','A',GETDATE(),'CARGA_SQL');
 insert into tb_depto values('105','3033','VICHADA','A',GETDATE(),'CARGA_SQL');
 
 /*=====================================================================
@@ -302,16 +302,16 @@ select * from tb_depto
 select * from tb_ciudad
 
 INSERT INTO tb_ciudad VALUES ('101','105','4001','ABEJORRAL','A',GETDATE(),'CARGA_SQL');
-INSERT INTO tb_ciudad VALUES ('101','105','4002','ABRIAQUÍ','A',GETDATE(),'CARGA_SQL');
-INSERT INTO tb_ciudad VALUES ('101','105','4003','ALEJANDRÍA','A',GETDATE(),'CARGA_SQL');
-INSERT INTO tb_ciudad VALUES ('101','105','4004','AMAGÁ','I',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4002','ABRIAQUï¿½','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4003','ALEJANDRï¿½A','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4004','AMAGï¿½','I',GETDATE(),'CARGA_SQL');
 INSERT INTO tb_ciudad VALUES ('101','105','4005','AMALFI','A',GETDATE(),'CARGA_SQL');
 INSERT INTO tb_ciudad VALUES ('101','105','4006','ANDES','I',GETDATE(),'CARGA_SQL');
-INSERT INTO tb_ciudad VALUES ('101','105','4007','ANGELÓPOLIS','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4007','ANGELï¿½POLIS','A',GETDATE(),'CARGA_SQL');
 INSERT INTO tb_ciudad VALUES ('101','105','4008','ANGOSTURA','I',GETDATE(),'CARGA_SQL');
-INSERT INTO tb_ciudad VALUES ('101','105','4009','ANORÍ','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4009','ANORï¿½','A',GETDATE(),'CARGA_SQL');
 INSERT INTO tb_ciudad VALUES ('101','105','4010','ANZA','A',GETDATE(),'CARGA_SQL');
-INSERT INTO tb_ciudad VALUES ('101','105','4011','APARTADÓ','A',GETDATE(),'CARGA_SQL');
+INSERT INTO tb_ciudad VALUES ('101','105','4011','APARTADï¿½','A',GETDATE(),'CARGA_SQL');
 INSERT INTO tb_ciudad VALUES ('101','105','4012','ARBOLETES','A',GETDATE(),'CARGA_SQL');
 INSERT INTO tb_ciudad VALUES ('101','105','4013','ARGELIA','I',GETDATE(),'CARGA_SQL');
 
@@ -394,3 +394,27 @@ update tb_ciudad set nom_ciu = @nomCiudad,
 					cod_ciudad = @codCiudad
 
 select * from tb_tipodoc
+
+/*=====================================================================
+Nombre: sp_buscar_pais_desc
+Objetivo: Buscar el registro en la tabla tb_pais segun criterio
+Fecha Creacion: 30/08/2019
+Autor: chcgutierrez
+=======================================================================*/
+alter proc sp_buscar_pais_desc
+@desc_pais varchar (150)
+as
+select
+cod_pais,
+nom_pais,
+est_pais,
+obs_gen
+from
+	tb_pais (nolock)
+where
+est_pais = 'A' and
+nom_pais like '%'+ @desc_pais +'%'
+
+exec sp_buscar_pais_desc 'AR'
+
+select * from tb_pais

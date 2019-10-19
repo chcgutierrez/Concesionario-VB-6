@@ -1,11 +1,12 @@
 frmUsuarios = 44, 44, 837, 490, C, 22, 22, 815, 468, C
-mod_Conexion = 0, 0, 750, 446, C
+mod_Conexion = 0, 0, 750, 446, 
 mod_Declaraciones = 66, 66, 816, 512, C
 frmLogin = 176, 176, 934, 630, C, 88, 88, 846, 542, C
 frmPrincipal = 0, 0, 0, 0, C, 22, 22, 780, 476, C
 frmTipoDoc = 132, 132, 859, 560, C, 0, 0, 727, 454, C
-frmPais = 66, 66, 793, 494, C, 66, 66, 793, 520, C
+frmPais = 66, 66, 793, 494, , 66, 66, 793, 520, C
 frmDepto = 52, 52, 664, 478, , 44, 44, 771, 498, C
-frmCiudad = 44, 44, 771, 472, Z, 154, 154, 881, 608, C
-mod_ProcesaBD = 66, 66, 793, 494, C
-mod_Funciones = 22, 22, 749, 450, C
+frmCiudad = 44, 44, 771, 472, , 154, 154, 881, 608, C
+mod_ProcesaBD = 66, 66, 793, 494, 
+mod_Funciones = 22, 22, 749, 450, 
+frm_bPais = 52, 52, 680, 494, Z, 130, 130, 758, 572, C

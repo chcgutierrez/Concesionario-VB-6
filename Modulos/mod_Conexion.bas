@@ -8,12 +8,12 @@ With ConexSQL
       "Integrated Security= SSPI;" & _
       "Persist Security Info= false;" & _
       "Initial Catalog= almCarros;" & _
-      "Data Source= CLIENTE-PC;"
+      "Data Source= ASUSK555D\SQLEXPRESS;"
 '      "Data Source= CLIENTE-PC;"
 'ASUSK555D\SQLEXPRESS
 'frmPais.Show
 'frmDepto.Show
-frmCiudad.Show
+frmPais.Show
 
 End With
 ExitProc:
