@@ -3,16 +3,24 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frm_bPais 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Buscar Pais"
-   ClientHeight    =   2895
+   ClientHeight    =   3360
    ClientLeft      =   45
    ClientTop       =   390
    ClientWidth     =   7125
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   2895
+   ScaleHeight     =   3360
    ScaleWidth      =   7125
    StartUpPosition =   1  'CenterOwner
+   Begin VB.CommandButton btnBsqAceptar 
+      Caption         =   "&Aceptar"
+      Height          =   375
+      Left            =   6000
+      TabIndex        =   5
+      Top             =   2880
+      Width           =   975
+   End
    Begin MSDataGridLib.DataGrid dtgPaisAct 
       Height          =   1695
       Left            =   120
@@ -110,7 +118,7 @@ Begin VB.Form frm_bPais
       EndProperty
    End
    Begin VB.Frame Frame1 
-      Caption         =   "Realizar Bï¿½squeda"
+      Caption         =   "Realizar Búsqueda"
       Height          =   855
       Left            =   120
       TabIndex        =   0
@@ -148,6 +156,44 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Dim bsqRespuesta As Boolean
+
+Public Function BusquedaPais(ByRef strCodPais As String, ByRef strDescPais As String) As Boolean
+       
+    On Error GoTo ControlError
+    
+        Set dtgPaisAct.DataSource = Nothing
+        bsqRespuesta = False
+        Me.Show vbModal
+        If bsqRespuesta Then
+            If Not dtgPaisAct.DataSource Is Nothing Then 'Grid del form busqueda
+                strCodPais = dtgPaisAct.Columns(0).Text
+                strDescPais = dtgPaisAct.Columns(1).Text
+                BusquedaPais = True
+            Else
+                BusquedaPais = False
+            End If
+        Else
+            BusquedaPais = False
+        End If
+        
+    Exit Function
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+          
+End Function
+
+Private Sub btnBsqAceptar_Click()
+On Error GoTo ControlError
+    Unload Me
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
 
 Private Sub btnBusqPais_Click()
 
@@ -155,24 +201,42 @@ Dim rsBusqPais As ADODB.Recordset
     
     On Error GoTo ControlError
     
-    If Len(Me.txtDescPais.Text) >= 4 Then
+    If Len(Me.txtDescPais.Text) > 0 Then
         Set rsBusqPais = TraerPaisDesc(txtDescPais.Text)
             If rsBusqPais.RecordCount > 0 Then
                 Set dtgPaisAct.DataSource = rsBusqPais
+                dtgPaisAct.Columns("Codigo").Width = 900
+                dtgPaisAct.Columns("Nombre").Width = 2300
+                dtgPaisAct.Columns("Estado").Width = 800
+                dtgPaisAct.Columns("Observaciones").Width = 1300
             Else
+                Set dtgPaisAct.DataSource = Nothing
                 Me.txtDescPais.SelStart = 0
                 Me.txtDescPais.SelLength = Len(Me.txtDescPais.Text)
-                MsgBox "No existe el Pais para el criterio ingresado.", vbOKOnly, "Buscar Pais"
+                MsgBox "El pais no existe o está inactivo", vbOKOnly, "Buscar Pais"
 '                Cancel
                 Exit Sub
             End If
     Else
          MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
          Me.txtDescPais.SetFocus
+         Set dtgPaisAct.DataSource = Nothing
 '         Cancel = True
          Exit Sub
     End If
     
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub txtDescPais_Change()
+On Error GoTo ControlError
+    txtDescPais.Text = UCase(txtDescPais.Text)
+    txtDescPais.SelStart = Len(txtDescPais)
 ExitProc:
 Exit Sub
 ControlError:

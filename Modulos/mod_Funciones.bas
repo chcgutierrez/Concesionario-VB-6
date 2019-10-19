@@ -151,6 +151,21 @@ ControlError:
 MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
 End Function
+
+Public Sub TextoMayusc(ByVal Frm As Form)
+On Error GoTo ControlError
+Dim Ctrl As Control
+For Each Ctrl In Frm.Controls
+    If TypeOf Ctrl Is TextBox Then
+        Ctrl.Text = UCase(Ctrl.Text)
+        Ctrl.SelStart = Len(Ctrl)
+    End If
+Next
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+End Sub
        
        
        

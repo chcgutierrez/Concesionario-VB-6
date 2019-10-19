@@ -157,12 +157,12 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub btn_cancelar_Click()
-cancelar
+'cancelar
 End Sub
 
 Private Sub btn_login_Click()
-login
-buscar
+'login
+'buscar
 End Sub
 
 Private Sub Form_Load()
@@ -180,15 +180,15 @@ End Sub
 Private Sub txt_clave_Validate(Cancel As Boolean)
 
 'Variable Global en Mod_Ppal
-g_strConexion = "Provider=SQLOLEDB.1;" & _
-           "Persist Security Info=False;" & _
-           "User ID=ccgutierrezm;" & _
-           "PWD=1030538949;" & _
-           "Initial Catalog=almCarros;" & _
-           "Data Source=CLIENTE-PC;" & _
-           "PP=fc:YYYY/MM/DD@fl:YYYY/MM/DD HH:NN:SS AM/PM@+:+@isnull:IsNull@;" & _
-           "Database=almCarros;" & _
-           "AnsiNPW=no"
+'g_strConexion = "Provider=SQLOLEDB.1;" & _
+'           "Persist Security Info=False;" & _
+'           "User ID=ccgutierrezm;" & _
+'           "PWD=1030538949;" & _
+'           "Initial Catalog=almCarros;" & _
+'           "Data Source=CLIENTE-PC;" & _
+'           "PP=fc:YYYY/MM/DD@fl:YYYY/MM/DD HH:NN:SS AM/PM@+:+@isnull:IsNull@;" & _
+'           "Database=almCarros;" & _
+'           "AnsiNPW=no"
 End Sub
 
 Private Sub txt_usuario_GotFocus()

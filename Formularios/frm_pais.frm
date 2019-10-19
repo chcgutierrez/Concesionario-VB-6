@@ -111,7 +111,7 @@ Begin VB.Form frmPais
       ColumnCount     =   5
       BeginProperty Column00 
          DataField       =   "cod_pais"
-         Caption         =   "Cï¿½digo"
+         Caption         =   "Codigo"
          BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
             Type            =   0
             Format          =   ""
@@ -252,7 +252,7 @@ Begin VB.Form frmPais
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "16/10/2019"
+            TextSave        =   "19/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -684,7 +684,11 @@ With cmdSQL
     With rstSQL
         If .State = 1 Then .Close
         Set rstSQL = cmdSQL.Execute
-        Set Me.dtgPais.DataSource = rstSQL
+        Set dtgPais.DataSource = rstSQL
+        dtgPais.Columns("Codigo").Width = 900
+        dtgPais.Columns("Nombre").Width = 2300
+        dtgPais.Columns("Estado").Width = 800
+        dtgPais.Columns("Observaciones").Width = 1300
     End With
 End With
 Set cmdSQL = Nothing
@@ -701,6 +705,52 @@ Resume ExitProc
 End Sub
 
 Private Sub txtCodPais_DblClick()
-    frm_bPais.Show vbModal
+
+On Error GoTo ControlError
+
+Dim blnMostrarDat As Boolean
+Dim strCodPais As String
+Dim strDescPais As String
+blnMostrarDat = frm_bPais.BusquedaPais(strCodPais, strDescPais)
+txtCodPais.Text = strCodPais
+    If Len(txtCodPais.Text) > 0 Then
+        SendKeys "{TAB}", True
+    End If
+Me.Refresh
+Exit Sub
+    
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+
 End Sub
+
+Private Sub txtNomPais_Change()
+On Error GoTo ControlError
+    txtNomPais.Text = UCase(txtNomPais.Text)
+    txtNomPais.SelStart = Len(txtNomPais)
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+
+Private Sub txtObser_Change()
+On Error GoTo ControlError
+    txtObser.Text = UCase(txtObser.Text)
+    txtObser.SelStart = Len(txtObser)
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
 

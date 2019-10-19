@@ -374,7 +374,7 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "16/10/2019"
+            TextSave        =   "19/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
