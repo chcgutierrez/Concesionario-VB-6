@@ -374,7 +374,7 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "19/10/2019"
+            TextSave        =   "21/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -730,7 +730,26 @@ Private Sub tlb_botones_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtCodPais_DblClick()
-    frm_bPais.Show vbModal
+On Error GoTo ControlError
+
+Dim blnMostrarDat As Boolean
+Dim strCodPais As String
+Dim strDescPais As String
+blnMostrarDat = frm_bPais.BusquedaPais(strCodPais, strDescPais)
+txtCodPais.Text = strCodPais
+txtDesPais = strDescPais
+    If Len(txtDesPais.Text) > 0 Then
+        txtDepto.SetFocus
+    End If
+Me.Refresh
+Exit Sub
+    
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
 End Sub
 
 Private Sub txtCodPais_Validate(Cancel As Boolean)

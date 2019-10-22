@@ -186,7 +186,8 @@ End Function
 
 Private Sub btnBsqAceptar_Click()
 On Error GoTo ControlError
-    Unload Me
+    bsqRespuesta = True
+    Me.Hide
 ExitProc:
 Exit Sub
 ControlError:
@@ -225,6 +226,18 @@ Dim rsBusqPais As ADODB.Recordset
          Exit Sub
     End If
     
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub dtgPaisAct_DblClick()
+On Error GoTo ControlError
+    bsqRespuesta = True
+    Me.Hide
 ExitProc:
 Exit Sub
 ControlError:
