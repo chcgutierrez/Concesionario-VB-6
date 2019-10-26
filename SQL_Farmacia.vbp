@@ -23,6 +23,7 @@ Form=Formularios\frmCiudad.frm
 Module=mod_ProcesaBD; Modulos\mod_ProcesaBD.bas
 Module=mod_Funciones; Modulos\mod_Funciones.bas
 Form=Formularios\frm_bPais.frm
+Form=Formularios\frm_bDepto.frm
 IconForm="frmLogin"
 Startup="Sub Main"
 HelpFile=""

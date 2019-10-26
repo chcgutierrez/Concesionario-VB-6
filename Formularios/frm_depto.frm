@@ -374,7 +374,7 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "21/10/2019"
+            TextSave        =   "26/10/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -812,6 +812,29 @@ Set cmdSQL = Nothing
 Set cmdSQL.ActiveConnection = Nothing
 'cmdSQL.ActiveConnection.Close
 Set rstSQL = Nothing
+ExitProc:
+Exit Sub
+ControlError:
+MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+          ". Descripción del error: " & Err.Description, vbCritical, App.Title
+Resume ExitProc
+End Sub
+
+Private Sub txtDepto_DblClick()
+On Error GoTo ControlError
+
+Dim blnMostrarDat As Boolean
+Dim strCodDepto As String
+Dim strDescDepto As String
+blnMostrarDat = frm_bDepto.BusqDepto(strCodDepto, strDescDepto)
+txtDepto.Text = strCodDepto
+'txtDesPais = strDescPais
+    If Len(txtDepto.Text) > 0 Then
+        cmdValidar_Click
+    End If
+Me.Refresh
+Exit Sub
+    
 ExitProc:
 Exit Sub
 ControlError:

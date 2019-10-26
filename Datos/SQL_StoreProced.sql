@@ -418,3 +418,30 @@ nom_pais like '%'+ @desc_pais +'%'
 exec sp_buscar_pais_desc 'AR'
 
 select * from tb_pais
+
+/*=====================================================================
+Nombre: sp_buscar_depto_desc
+Objetivo: Buscar el registro en la tabla tb_depto segun criterio
+Fecha Creacion: 30/08/2019
+Autor: chcgutierrez
+=======================================================================*/
+alter proc sp_buscar_depto_desc
+@codPais varchar (10),
+@desDepto varchar (150)
+as
+select
+A.cod_depto,
+A.nom_depto,
+A.est_depto,
+A.obs_gen
+from
+	tb_depto A (nolock) inner join tb_pais B (nolock)
+		on B.id_pais = A.id_pais
+where
+B.cod_pais = @codPais and
+A.est_depto = 'A' and
+A.nom_depto like '%'+ @desDepto +'%'
+
+select * from tb_depto
+
+exec sp_buscar_depto_desc '2005', 'AR'
