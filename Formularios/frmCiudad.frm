@@ -329,7 +329,7 @@ Begin VB.Form frmCiudad
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "26/10/2019"
+            TextSave        =   "20/11/2019"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -725,6 +725,9 @@ On Error GoTo ControlError
 Dim blnMostrarDat As Boolean
 Dim strCodDepto As String
 Dim strDescDepto As String
+
+strCodPais = txtCodPais.Text
+
 blnMostrarDat = frm_bDepto.BusqDepto(strCodDepto, strDescDepto)
 Me.txtCodDepto.Text = strCodDepto
 txtDesDepto = strDescDepto
@@ -733,7 +736,7 @@ txtDesDepto = strDescDepto
     End If
 Me.Refresh
 Exit Sub
-    
+strCodPais = ""
 ExitProc:
 Exit Sub
 ControlError:

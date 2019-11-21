@@ -157,7 +157,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim bsqDepto As Boolean
-
+Private CodPais As String
 
 Public Function BusqDepto(ByRef strCodDepto As String, ByRef strDescDepto As String) As Boolean
        
@@ -202,9 +202,9 @@ Private Sub btnBusqDepto_Click()
 Dim rsBusqDepto As ADODB.Recordset
     
     On Error GoTo ControlError
-'    CodPais = TraerPaisDesc(txtDescPais.Text)
+    
     If Len(Me.txtDescDepto.Text) > 0 Then
-        Set rsBusqDepto = TraerDeptoDesc(CodPais, txtDescDepto.Text)
+        Set rsBusqDepto = TraerDeptoDesc(strCodPais, txtDescDepto.Text)
             If rsBusqDepto.RecordCount > 0 Then
                 Set dtgDeptoAct.DataSource = rsBusqDepto
                 dtgDeptoAct.Columns("Codigo").Width = 900
