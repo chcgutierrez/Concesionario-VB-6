@@ -50,79 +50,46 @@ End Enum
 Public Sub PrenderMenus(ByVal Formulario As Object, ByVal tlbFormulario As Toolbar, _
                         ByVal bytCodigo As TipoAccionMenu, Optional ByVal intBotonAct As Integer = 0, _
                         Optional ByVal blnPrender As Boolean = True)
-'On Error GoTo ControlError
-    If Not tlbFormulario Is Nothing Then
-        With tlbFormulario
-            .Buttons("btnNuevo").Enabled = ((cnstMnuNuevo And bytCodigo) Or (cnstMnuNuevo And intBotonAct)) And blnPrender
-            .Buttons("btnEditar").Enabled = ((cnstMnuEditar And bytCodigo) Or (cnstMnuEditar And intBotonAct)) And blnPrender
-            .Buttons("btnBorrar").Enabled = ((cnstMnuBorrar And bytCodigo) Or (cnstMnuBorrar And intBotonAct)) And blnPrender
-            .Buttons("btnCancelar").Enabled = (cnstMnuCancelar And bytCodigo) Or (cnstMnuCancelar And intBotonAct) And blnPrender
-'            .Buttons("btnCargar").Enabled = ((cnstMnuCargar And bytCodigo) Or (cnstMnuCargar And intBotonAct)) And blnPrender
-            .Buttons("btnBuscar").Enabled = ((cnstMnuBuscar And bytCodigo) Or (cnstMnuBuscar And intBotonAct)) And blnPrender
-            .Buttons("btnGuardar").Enabled = ((cnstMnuGuardar And bytCodigo) Or (cnstMnuGuardar And intBotonAct)) And blnPrender
-            .Buttons("btnImprimir").Enabled = (cnstMnuImprimir And bytCodigo) Or (cnstMnuImprimir And intBotonAct) And blnPrender
-            .Buttons("btnSalir").Enabled = (cnstMnuCerrar And bytCodigo) Or (cnstMnuCerrar And intBotonAct) And blnPrender
-            Formulario.mnuArchivo_Nuevo.Enabled = .Buttons("btnNuevo").Enabled
-            Formulario.mnuArchivo_Editar.Enabled = .Buttons("btnEditar").Enabled
-            Formulario.mnuArchivo_Cancelar.Enabled = .Buttons("btnCancelar").Enabled
-'            Formulario.mnuArchivo_Borrar.Enabled = .Buttons("btnBorrar").Enabled
-'            Formulario.mnuArchivo_Cargar.Enabled = .Buttons("btnCargar").Enabled
-            Formulario.mnuArchivo_Buscar.Enabled = .Buttons("btnBuscar").Enabled
-            Formulario.mnuArchivo_Guardar.Enabled = .Buttons("btnGuardar").Enabled
-            Formulario.mnuArchivo_Imprimir.Enabled = .Buttons("btnImprimir").Enabled
-            Formulario.mnuArchivo_Salir.Enabled = .Buttons("btnSalir").Enabled
-        End With
-    End If
-Exit Sub
+       'On Error GoTo ControlError
+1000   If Not tlbFormulario Is Nothing Then
+1010      With tlbFormulario
+1020         .Buttons("btnNuevo").Enabled = ((cnstMnuNuevo And bytCodigo) Or (cnstMnuNuevo And intBotonAct)) And blnPrender
+1030         .Buttons("btnEditar").Enabled = ((cnstMnuEditar And bytCodigo) Or (cnstMnuEditar And intBotonAct)) And blnPrender
+1040         .Buttons("btnBorrar").Enabled = ((cnstMnuBorrar And bytCodigo) Or (cnstMnuBorrar And intBotonAct)) And blnPrender
+1050         .Buttons("btnCancelar").Enabled = (cnstMnuCancelar And bytCodigo) Or (cnstMnuCancelar And intBotonAct) And blnPrender
+             '            .Buttons("btnCargar").Enabled = ((cnstMnuCargar And bytCodigo) Or (cnstMnuCargar And intBotonAct)) And blnPrender
+1060         .Buttons("btnBuscar").Enabled = ((cnstMnuBuscar And bytCodigo) Or (cnstMnuBuscar And intBotonAct)) And blnPrender
+1070         .Buttons("btnGuardar").Enabled = ((cnstMnuGuardar And bytCodigo) Or (cnstMnuGuardar And intBotonAct)) And blnPrender
+1080         .Buttons("btnImprimir").Enabled = (cnstMnuImprimir And bytCodigo) Or (cnstMnuImprimir And intBotonAct) And blnPrender
+1090         .Buttons("btnSalir").Enabled = (cnstMnuCerrar And bytCodigo) Or (cnstMnuCerrar And intBotonAct) And blnPrender
+1100         Formulario.mnuArchivo_Nuevo.Enabled = .Buttons("btnNuevo").Enabled
+1110         Formulario.mnuArchivo_Editar.Enabled = .Buttons("btnEditar").Enabled
+1120         Formulario.mnuArchivo_Cancelar.Enabled = .Buttons("btnCancelar").Enabled
+             '            Formulario.mnuArchivo_Borrar.Enabled = .Buttons("btnBorrar").Enabled
+             '            Formulario.mnuArchivo_Cargar.Enabled = .Buttons("btnCargar").Enabled
+1130         Formulario.mnuArchivo_Buscar.Enabled = .Buttons("btnBuscar").Enabled
+1140         Formulario.mnuArchivo_Guardar.Enabled = .Buttons("btnGuardar").Enabled
+1150         Formulario.mnuArchivo_Imprimir.Enabled = .Buttons("btnImprimir").Enabled
+1160         Formulario.mnuArchivo_Salir.Enabled = .Buttons("btnSalir").Enabled
+1170      End With
+1180   End If
+1190   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1200   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error:" & Err.Description, vbCritical, App.Title
 End Sub
 
 Public Sub TextoMayusc(ByVal Frm As Form)
-On Error GoTo ControlError
-Dim Ctrl As Control
-For Each Ctrl In Frm.Controls
-    If TypeOf Ctrl Is TextBox Then
-        Ctrl.Text = UCase(Ctrl.Text)
-        Ctrl.SelStart = Len(Ctrl)
-    End If
-Next
-Exit Sub
+1000   On Error GoTo ControlError
+       Dim Ctrl As Control
+1010   For Each Ctrl In Frm.Controls
+1020      If TypeOf Ctrl Is TextBox Then
+1030         Ctrl.Text = UCase(Ctrl.Text)
+1040         Ctrl.SelStart = Len(Ctrl)
+1050      End If
+1060   Next
+1070   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1080   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
 End Sub
-
-
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-

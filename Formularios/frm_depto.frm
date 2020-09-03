@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmDepto 
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
@@ -374,7 +374,7 @@ Begin VB.Form frmDepto
             Alignment       =   1
             AutoSize        =   2
             Text            =   "Ver 1.0.0"
-            TextSave        =   "26/10/2019"
+            TextSave        =   "30/04/2020"
             Key             =   "sbrPan01"
          EndProperty
          BeginProperty Panel2 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
@@ -517,328 +517,336 @@ Option Explicit
 Dim bytFlagModifica As Byte
 
 Private Sub cmdValidar_Click()
-    If Me.txtCodPais.Text <> "" And Me.txtDepto.Text <> "" Then
-        mnuArchivo_Buscar_Click
-    Else
-        MsgBox "Datos Incompletos", vbInformation + vbOKOnly, "Consultar"
-    End If
+100   If Me.txtCodPais.Text <> "" And Me.txtDepto.Text <> "" Then
+110      mnuArchivo_Buscar_Click
+120   Else
+130      MsgBox "Datos Incompletos", vbInformation + vbOKOnly, "Consultar"
+140   End If
 End Sub
 
 Private Sub Form_Load()
-    AbrirDepto
-    mnuArchivo_Nuevo_Click
-    PrenderMenus Me, tlb_botones, gcnstConsCompleta
+100   AbrirDepto
+110   mnuArchivo_Nuevo_Click
+120   PrenderMenus Me, tlb_botones, gcnstConsCompleta
 End Sub
 
 Private Sub mnuArchivo_Buscar_Click()
-On Error GoTo ControlError
-
-With cmdSQL
-.ActiveConnection = ConexSQL
-.CommandType = adCmdStoredProc
-.CommandText = "sp_buscar_depto"
-.Parameters.Append .CreateParameter("@codPais", adVarChar, adParamInput, 10, Me.txtCodPais.Text)
-.Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
-Set rstSQL = cmdSQL.Execute
-End With
-Set cmdSQL = Nothing
-Set cmdSQL.ActiveConnection = Nothing
-'cmdSQL.ActiveConnection.Close
-If rstSQL.RecordCount > 0 Then
-    If MsgBox("El registro ya existe. ¿Mostrar Datos?", vbQuestion + vbYesNo, "Consultar") = vbYes Then
-        Me.txtNomDepto.Text = rstSQL("nom_depto").Value
-            If rstSQL("est_depto").Value = "A" Then
-                Me.optActivo = True
-            Else
-                Me.optInactivo = True
-            End If
-        Me.txtObser.Text = rstSQL("obs_gen").Value
-    End If
-    Set rstSQL = Nothing
-Else
-Me.txtCodPais.Enabled = False
-Me.txtDepto.Enabled = False
-Me.cmdValidar.Enabled = False
-Me.txtNomDepto.Enabled = True
-Me.optActivo.Enabled = True
-Me.optInactivo.Enabled = True
-Me.txtObser.Enabled = True
-End If
+1000   On Error GoTo ControlError
+       
+1010   With cmdSQL
+1020      .ActiveConnection = ConexSQL
+1030      .CommandType = adCmdStoredProc
+1040      .CommandText = "sp_buscar_depto"
+1050      .Parameters.Append .CreateParameter("@codPais", adVarChar, adParamInput, 10, Me.txtCodPais.Text)
+1060      .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
+1070      Set rstSQL = cmdSQL.Execute
+1080   End With
+       
+1090   Set cmdSQL = Nothing
+1100   Set cmdSQL.ActiveConnection = Nothing
+       '1110   cmdSQL.ActiveConnection.Close
+       
+1110   If rstSQL.RecordCount > 0 Then
+1120      If MsgBox("El registro ya existe. ¿Mostrar Datos?", vbQuestion + vbYesNo, "Consultar") = vbYes Then
+1130         Me.txtNomDepto.Text = rstSQL("nom_depto").Value
+1140         If rstSQL("est_depto").Value = "A" Then
+1150            Me.optActivo = True
+1160         Else
+1170            Me.optInactivo = True
+1180         End If
+1190         Me.txtObser.Text = rstSQL("obs_gen").Value
+1200      End If
+1210      Set rstSQL = Nothing
+1220   Else
+1230      Me.txtCodPais.Enabled = False
+1240      Me.txtDepto.Enabled = False
+1250      Me.cmdValidar.Enabled = False
+1260      Me.txtNomDepto.Enabled = True
+1270      Me.optActivo.Enabled = True
+1280      Me.optInactivo.Enabled = True
+1290      Me.txtObser.Enabled = True
+1300   End If
 ExitProc:
-Exit Sub
+1310   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1320   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
-
+1330   Resume ExitProc
+       
 End Sub
 
 Private Sub mnuArchivo_Cancelar_Click()
-On Error GoTo ControlError
-
-Me.txtCodPais.Enabled = False
-Me.txtDepto.Enabled = False
-Me.txtNomDepto.Enabled = False
-Me.optActivo.Enabled = False
-Me.optInactivo.Enabled = False
-Me.txtObser.Enabled = False
-
+1000   On Error GoTo ControlError
+       
+1010   Me.txtCodPais.Enabled = False
+1020   Me.txtDepto.Enabled = False
+1030   Me.txtNomDepto.Enabled = False
+1040   Me.optActivo.Enabled = False
+1050   Me.optInactivo.Enabled = False
+1060   Me.txtObser.Enabled = False
+       
 ExitProc:
-Exit Sub
+1070   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1080   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1090   Resume ExitProc
 End Sub
 
 Private Sub mnuArchivo_Editar_Click()
-On Error GoTo ControlError
-
-Me.txtCodPais.Enabled = False
-Me.txtDepto.Enabled = False
-Me.cmdValidar.Enabled = False
-Me.txtNomDepto.Enabled = True
-Me.optActivo.Enabled = True
-Me.optInactivo.Enabled = True
-Me.txtObser.Enabled = True
-bytFlagModifica = 1
-
+1000   On Error GoTo ControlError
+       
+1010   Me.txtCodPais.Enabled = False
+1020   Me.txtDepto.Enabled = False
+1030   Me.cmdValidar.Enabled = False
+1040   Me.txtNomDepto.Enabled = True
+1050   Me.optActivo.Enabled = True
+1060   Me.optInactivo.Enabled = True
+1070   Me.txtObser.Enabled = True
+1080   bytFlagModifica = 1
+       
 ExitProc:
-Exit Sub
+1090   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1100   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1110   Resume ExitProc
 End Sub
 
 Private Sub mnuArchivo_Guardar_Click()
-
-Dim estDepto As String
-Dim rsPais As ADODB.Recordset
-
-On Error GoTo ControlError
-
-If Me.optActivo = True Then
-estDepto = "A"
-ElseIf Me.optInactivo = True Then
-estDepto = "I"
-End If
-
-    If Len(Me.txtCodPais.Text) > 0 Then
-        Set rsPais = TraerPais(txtCodPais.Text)
-    End If
-
-If bytFlagModifica = 0 Then
-
-With cmdSQL
-.ActiveConnection = ConexSQL
-.CommandType = adCmdStoredProc
-.CommandText = "sp_guardar_depto"
-    .Parameters.Append .CreateParameter("@idPais", adInteger, adParamInput, 10, rsPais("id_pais").Value)
-    .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
-    .Parameters.Append .CreateParameter("@nomDepto", adVarChar, adParamInput, 100, Me.txtNomDepto.Text)
-    .Parameters.Append .CreateParameter("@estDepto", adVarChar, adParamInput, 10, estDepto)
-    .Parameters.Append .CreateParameter("@obsGen", adVarChar, adParamInput, 100, Me.txtObser.Text)
-.Execute
-End With
-Set cmdSQL = Nothing
-Set cmdSQL.ActiveConnection = Nothing
-'cmdSQL.ActiveConnection.Close
-mnuArchivo_Cancelar_Click
-MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
-AbrirDepto
-
-Else
-
-With cmdSQL
-.ActiveConnection = ConexSQL
-.CommandType = adCmdStoredProc
-.CommandText = "sp_editar_depto"
-    .Parameters.Append .CreateParameter("@idPais", adInteger, adParamInput, 10, rsPais("id_pais").Value)
-    .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
-    .Parameters.Append .CreateParameter("@nomDepto", adVarChar, adParamInput, 100, Me.txtNomDepto.Text)
-    .Parameters.Append .CreateParameter("@estDepto", adVarChar, adParamInput, 10, estDepto)
-    .Parameters.Append .CreateParameter("@obsGen", adVarChar, adParamInput, 100, Me.txtObser.Text)
-.Execute
-End With
-Set cmdSQL = Nothing
-Set cmdSQL.ActiveConnection = Nothing
-'cmdSQL.ActiveConnection.Close
-mnuArchivo_Cancelar_Click
-MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
-AbrirDepto
-
-End If
-
-Set rsPais = Nothing
-
+       
+       Dim estDepto As String
+       Dim rsPais As ADODB.Recordset
+       
+1000   On Error GoTo ControlError
+       
+1010   If Me.optActivo = True Then
+1020      estDepto = "A"
+1030   ElseIf Me.optInactivo = True Then
+1040      estDepto = "I"
+1050   End If
+       
+1060   If Len(Me.txtCodPais.Text) > 0 Then
+1070      Set rsPais = TraerPais(txtCodPais.Text)
+1080   End If
+       
+1090   If bytFlagModifica = 0 Then
+          
+1100      With cmdSQL
+1110         .ActiveConnection = ConexSQL
+1120         .CommandType = adCmdStoredProc
+1130         .CommandText = "sp_guardar_depto"
+1140         .Parameters.Append .CreateParameter("@idPais", adInteger, adParamInput, 10, rsPais("id_pais").Value)
+1150         .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
+1160         .Parameters.Append .CreateParameter("@nomDepto", adVarChar, adParamInput, 100, Me.txtNomDepto.Text)
+1170         .Parameters.Append .CreateParameter("@estDepto", adVarChar, adParamInput, 10, estDepto)
+1180         .Parameters.Append .CreateParameter("@obsGen", adVarChar, adParamInput, 100, Me.txtObser.Text)
+1190         .Execute
+1200      End With
+1210      Set cmdSQL = Nothing
+1220      Set cmdSQL.ActiveConnection = Nothing
+          '1230      cmdSQL.ActiveConnection.Close
+1230      mnuArchivo_Cancelar_Click
+1240      MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+1250      AbrirDepto
+          
+1260   Else
+          
+1270      With cmdSQL
+1280         .ActiveConnection = ConexSQL
+1290         .CommandType = adCmdStoredProc
+1300         .CommandText = "sp_editar_depto"
+1310         .Parameters.Append .CreateParameter("@idPais", adInteger, adParamInput, 10, rsPais("id_pais").Value)
+1320         .Parameters.Append .CreateParameter("@codDepto", adVarChar, adParamInput, 10, Me.txtDepto.Text)
+1330         .Parameters.Append .CreateParameter("@nomDepto", adVarChar, adParamInput, 100, Me.txtNomDepto.Text)
+1340         .Parameters.Append .CreateParameter("@estDepto", adVarChar, adParamInput, 10, estDepto)
+1350         .Parameters.Append .CreateParameter("@obsGen", adVarChar, adParamInput, 100, Me.txtObser.Text)
+1360         .Execute
+1370      End With
+1380      Set cmdSQL = Nothing
+1390      Set cmdSQL.ActiveConnection = Nothing
+          '1400      cmdSQL.ActiveConnection.Close
+1400      mnuArchivo_Cancelar_Click
+1410      MsgBox "Datos Guardados Correctamente", vbInformation + vbOKOnly, "Guardar"
+1420      AbrirDepto
+          
+1430   End If
+       
+1440   Set rsPais = Nothing
+       
 ExitProc:
-Exit Sub
+1450   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1460   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1470   Resume ExitProc
 End Sub
 
-
 Private Sub mnuArchivo_Nuevo_Click()
-On Error GoTo ControlError
 
-Me.txtCodPais.Text = ""
-Me.txtCodPais.Enabled = True
-Me.txtDesPais.Enabled = False
-Me.txtDesPais.Text = ""
-Me.txtDepto.Text = ""
-Me.txtDepto.Enabled = True
-Me.cmdValidar.Enabled = True
-Me.txtNomDepto.Text = ""
-Me.txtNomDepto.Enabled = False
-Me.txtObser.Text = ""
-Me.txtObser.Enabled = False
-Me.optActivo.Enabled = False
-Me.optActivo.Value = False
-Me.optInactivo.Enabled = False
-Me.optInactivo.Value = False
-bytFlagModifica = 0
-
+1000   On Error GoTo ControlError
+       
+1010   Me.txtCodPais.Text = ""
+1020   Me.txtCodPais.Enabled = True
+1030   Me.txtDesPais.Enabled = False
+1040   Me.txtDesPais.Text = ""
+1050   Me.txtDepto.Text = ""
+1060   Me.txtDepto.Enabled = True
+1070   Me.cmdValidar.Enabled = True
+1080   Me.txtNomDepto.Text = ""
+1090   Me.txtNomDepto.Enabled = False
+1100   Me.txtObser.Text = ""
+1110   Me.txtObser.Enabled = False
+1120   Me.optActivo.Enabled = False
+1130   Me.optActivo.Value = False
+1140   Me.optInactivo.Enabled = False
+1150   Me.optInactivo.Value = False
+1160   bytFlagModifica = 0
+       
 ExitProc:
-Exit Sub
+1170   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1180   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1190   Resume ExitProc
 End Sub
 
 Private Sub mnuArchivo_Salir_Click()
-    If MsgBox("¿Cerrar el Formulario?", vbQuestion + vbYesNo, "Cerrar") = vbYes Then
-        Unload Me
-    End If
+100   If MsgBox("¿Cerrar el Formulario?", vbQuestion + vbYesNo, "Cerrar") = vbYes Then
+110      Unload Me
+120   End If
 End Sub
 
 Private Sub tlb_botones_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Key
-
-        Case "btnNuevo": mnuArchivo_Nuevo_Click
-        
-        Case "btnEditar": mnuArchivo_Editar_Click
-        
-        Case "btnGuardar": mnuArchivo_Guardar_Click
-        
-        Case "btnSalir": mnuArchivo_Salir_Click
-
-    End Select
+1000   Select Case Button.Key
+          
+       Case "btnNuevo": mnuArchivo_Nuevo_Click
+          
+       Case "btnEditar": mnuArchivo_Editar_Click
+          
+       Case "btnGuardar": mnuArchivo_Guardar_Click
+          
+       Case "btnSalir": mnuArchivo_Salir_Click
+          
+1010   End Select
 End Sub
 
 Private Sub txtCodPais_DblClick()
-On Error GoTo ControlError
-
-Dim blnMostrarDat As Boolean
-Dim strCodPais As String
-Dim strDescPais As String
-blnMostrarDat = frm_bPais.BusquedaPais(strCodPais, strDescPais)
-txtCodPais.Text = strCodPais
-txtDesPais = strDescPais
-    If Len(txtDesPais.Text) > 0 Then
-        txtDepto.SetFocus
-    End If
-Me.Refresh
-Exit Sub
-    
+       
+       Dim blnMostrarDat As Boolean
+       Dim strCodPais As String
+       Dim strDescPais As String
+       
+1000   On Error GoTo ControlError
+       
+1010   blnMostrarDat = frm_bPais.BusquedaPais(strCodPais, strDescPais)
+1020   txtCodPais.Text = strCodPais
+1030   txtDesPais = strDescPais
+1040   If Len(txtDesPais.Text) > 0 Then
+1050      txtDepto.SetFocus
+1060   End If
+1070   Me.Refresh
+1080   Exit Sub
+       
 ExitProc:
-Exit Sub
+1090   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1100   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1110   Resume ExitProc
 End Sub
 
 Private Sub txtCodPais_Validate(Cancel As Boolean)
-
-    Dim rsPais As ADODB.Recordset
-    
-    On Error GoTo ControlError
-    
-    If Len(Me.txtCodPais.Text) > 0 Then
-        Set rsPais = TraerPais(txtCodPais.Text)
-            If rsPais.RecordCount > 0 Then
-                    If rsPais("est_pais").Value = "I" Then
-                        Me.txtCodPais.SelStart = 0
-                        Me.txtCodPais.SelLength = Len(Me.txtCodPais.Text)
-                        MsgBox "El Pais ingresado está inactivo.", vbOKOnly, "Buscar Pais"
-                        Me.txtDesPais.Text = ""
-                        Cancel = True
-                        Exit Sub
-                    End If
-                Me.txtDesPais.Text = rsPais("nom_pais").Value
-            Else
-                Me.txtCodPais.SelStart = 0
-                Me.txtCodPais.SelLength = Len(Me.txtCodPais.Text)
-                MsgBox "No existe el Pais para el criterio ingresado.", vbOKOnly, "Buscar Pais"
-                Me.txtDesPais.Text = ""
-                Cancel = True
-                Exit Sub
-            End If
-    Else
-         Me.txtDesPais.Text = ""
-         MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
-         Me.txtCodPais.SetFocus
-         Cancel = True
-         Exit Sub
-    End If
-    
+       
+       Dim rsPais As ADODB.Recordset
+       
+1000   On Error GoTo ControlError
+       
+1010   If Len(Me.txtCodPais.Text) > 0 Then
+1020      Set rsPais = TraerPais(txtCodPais.Text)
+1030      If rsPais.RecordCount > 0 Then
+1040         If rsPais("est_pais").Value = "I" Then
+1050            Me.txtCodPais.SelStart = 0
+1060            Me.txtCodPais.SelLength = Len(Me.txtCodPais.Text)
+1070            MsgBox "El Pais ingresado está inactivo.", vbOKOnly, "Buscar Pais"
+1080            Me.txtDesPais.Text = ""
+1090            Cancel = True
+1100            Exit Sub
+1110         End If
+1120         Me.txtDesPais.Text = rsPais("nom_pais").Value
+1130      Else
+1140         Me.txtCodPais.SelStart = 0
+1150         Me.txtCodPais.SelLength = Len(Me.txtCodPais.Text)
+1160         MsgBox "No existe el Pais para el criterio ingresado.", vbOKOnly, "Buscar Pais"
+1170         Me.txtDesPais.Text = ""
+1180         Cancel = True
+1190         Exit Sub
+1200      End If
+1210   Else
+1220      Me.txtDesPais.Text = ""
+1230      MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
+1240      Me.txtCodPais.SetFocus
+1250      Cancel = True
+1260      Exit Sub
+1270   End If
+       
 ExitProc:
-Exit Sub
+1280   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1290   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
-
+1300   Resume ExitProc
+       
 End Sub
 
 Private Sub AbrirDepto()
-On Error GoTo ControlError
-
-With cmdSQL
-.ActiveConnection = ConexSQL
-.CommandType = adCmdStoredProc
-.CommandText = "sp_mostrar_depto"
-    With rstSQL
-        If .State = 1 Then .Close
-        Set rstSQL = cmdSQL.Execute
-        Set Me.dtgDepto.DataSource = rstSQL
-    End With
-End With
-Set cmdSQL = Nothing
-Set cmdSQL.ActiveConnection = Nothing
-'cmdSQL.ActiveConnection.Close
-Set rstSQL = Nothing
+1000   On Error GoTo ControlError
+       
+1010   With cmdSQL
+1020      .ActiveConnection = ConexSQL
+1030      .CommandType = adCmdStoredProc
+1040      .CommandText = "sp_mostrar_depto"
+1050      With rstSQL
+1060         If .State = 1 Then
+1070            .Close
+1080         End If
+1090         Set rstSQL = cmdSQL.Execute
+1100         Set Me.dtgDepto.DataSource = rstSQL
+1110      End With
+1120   End With
+1130   Set cmdSQL = Nothing
+1140   Set cmdSQL.ActiveConnection = Nothing
+       '1160   cmdSQL.ActiveConnection.Close 'com
+1150   Set rstSQL = Nothing
 ExitProc:
-Exit Sub
+1160   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1170   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1180   Resume ExitProc
 End Sub
 
 Private Sub txtDepto_DblClick()
-On Error GoTo ControlError
-
-Dim blnMostrarDat As Boolean
-Dim strCodDepto As String
-Dim strDescDepto As String
-blnMostrarDat = frm_bDepto.BusqDepto(strCodDepto, strDescDepto)
-txtDepto.Text = strCodDepto
-'txtDesPais = strDescPais
-    If Len(txtDepto.Text) > 0 Then
-        cmdValidar_Click
-    End If
-Me.Refresh
-Exit Sub
-    
+       
+       Dim blnMostrarDat As Boolean
+       Dim strCodDepto As String
+       Dim strDescDepto As String
+       
+1000   On Error GoTo ControlError
+       
+1010   blnMostrarDat = frm_bDepto.BusqDepto(strCodDepto, strDescDepto)
+1020   txtDepto.Text = strCodDepto
+       '1030   txtDesPais = strDescPais 'com
+1030   If Len(txtDepto.Text) > 0 Then
+1040      cmdValidar_Click
+1050   End If
+1060   Me.Refresh
+1070   Exit Sub
+       
 ExitProc:
-Exit Sub
+1080   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1090   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1100   Resume ExitProc
 End Sub

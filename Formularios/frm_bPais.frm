@@ -160,100 +160,100 @@ Dim bsqRespuesta As Boolean
 
 Public Function BusquedaPais(ByRef strCodPais As String, ByRef strDescPais As String) As Boolean
        
-    On Error GoTo ControlError
-    
-        Set dtgPaisAct.DataSource = Nothing
-        bsqRespuesta = False
-        Me.Show vbModal
-        If bsqRespuesta Then
-            If Not dtgPaisAct.DataSource Is Nothing Then 'Grid del form busqueda
-                strCodPais = dtgPaisAct.Columns(0).Text
-                strDescPais = dtgPaisAct.Columns(1).Text
-                BusquedaPais = True
-            Else
-                BusquedaPais = False
-            End If
-        Else
-            BusquedaPais = False
-        End If
-        
-    Exit Function
+1000   On Error GoTo ControlError
+       
+1010   Set dtgPaisAct.DataSource = Nothing
+1020   bsqRespuesta = False
+1030   Me.Show vbModal
+1040   If bsqRespuesta Then
+1050      If Not dtgPaisAct.DataSource Is Nothing Then 'Grid del form busqueda
+1070         strCodPais = dtgPaisAct.Columns(0).Text
+1080         strDescPais = dtgPaisAct.Columns(1).Text
+1090         BusquedaPais = True
+1100      Else
+1110         BusquedaPais = False
+1120      End If
+1130   Else
+1140      BusquedaPais = False
+1150   End If
+       
+1160   Exit Function
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1170   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-          
+       
 End Function
 
 Private Sub btnBsqAceptar_Click()
-On Error GoTo ControlError
-    bsqRespuesta = True
-    Me.Hide
+100   On Error GoTo ControlError
+110   bsqRespuesta = True
+120   Me.Hide
 ExitProc:
-Exit Sub
+130   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
-          ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+140   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+         ". Descripción del error: " & Err.Description, vbCritical, App.Title
+150   Resume ExitProc
 End Sub
 
 Private Sub btnBusqPais_Click()
-
-Dim rsBusqPais As ADODB.Recordset
-    
-    On Error GoTo ControlError
-    
-    If Len(Me.txtDescPais.Text) > 0 Then
-        Set rsBusqPais = TraerPaisDesc(txtDescPais.Text)
-            If rsBusqPais.RecordCount > 0 Then
-                Set dtgPaisAct.DataSource = rsBusqPais
-                dtgPaisAct.Columns("Codigo").Width = 900
-                dtgPaisAct.Columns("Nombre").Width = 2300
-                dtgPaisAct.Columns("Estado").Width = 800
-                dtgPaisAct.Columns("Observaciones").Width = 1300
-            Else
-                Set dtgPaisAct.DataSource = Nothing
-                Me.txtDescPais.SelStart = 0
-                Me.txtDescPais.SelLength = Len(Me.txtDescPais.Text)
-                MsgBox "El pais no existe o está inactivo", vbOKOnly, "Buscar Pais"
-'                Cancel
-                Exit Sub
-            End If
-    Else
-         MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
-         Me.txtDescPais.SetFocus
-         Set dtgPaisAct.DataSource = Nothing
-'         Cancel = True
-         Exit Sub
-    End If
-    
+       
+       Dim rsBusqPais As ADODB.Recordset
+       
+1000   On Error GoTo ControlError
+       
+1010   If Len(Me.txtDescPais.Text) > 0 Then
+1020      Set rsBusqPais = TraerPaisDesc(txtDescPais.Text)
+1030      If rsBusqPais.RecordCount > 0 Then
+1040         Set dtgPaisAct.DataSource = rsBusqPais
+1050         dtgPaisAct.Columns("Codigo").Width = 900
+1060         dtgPaisAct.Columns("Nombre").Width = 2300
+1070         dtgPaisAct.Columns("Estado").Width = 800
+1080         dtgPaisAct.Columns("Observaciones").Width = 1300
+1090      Else
+1100         Set dtgPaisAct.DataSource = Nothing
+1110         Me.txtDescPais.SelStart = 0
+1120         Me.txtDescPais.SelLength = Len(Me.txtDescPais.Text)
+1130         MsgBox "El pais no existe o está inactivo", vbOKOnly, "Buscar Pais"
+             '                Cancel
+1140         Exit Sub
+1150      End If
+1160   Else
+1170      MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
+1180      Me.txtDescPais.SetFocus
+1190      Set dtgPaisAct.DataSource = Nothing
+          '         Cancel = True
+1200      Exit Sub
+1210   End If
+       
 ExitProc:
-Exit Sub
+1220   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1230   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1240   Resume ExitProc
 End Sub
 
 Private Sub dtgPaisAct_DblClick()
-On Error GoTo ControlError
-    bsqRespuesta = True
-    Me.Hide
+100   On Error GoTo ControlError
+110   bsqRespuesta = True
+120   Me.Hide
 ExitProc:
-Exit Sub
+130   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
-          ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+140   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+         ". Descripción del error: " & Err.Description, vbCritical, App.Title
+150   Resume ExitProc
 End Sub
 
 Private Sub txtDescPais_Change()
-On Error GoTo ControlError
-    txtDescPais.Text = UCase(txtDescPais.Text)
-    txtDescPais.SelStart = Len(txtDescPais)
+100   On Error GoTo ControlError
+110   txtDescPais.Text = UCase(txtDescPais.Text)
+120   txtDescPais.SelStart = Len(txtDescPais)
 ExitProc:
-Exit Sub
+130   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
-          ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+140   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+         ". Descripción del error: " & Err.Description, vbCritical, App.Title
+150   Resume ExitProc
 End Sub

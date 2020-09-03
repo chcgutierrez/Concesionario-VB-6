@@ -161,89 +161,90 @@ Dim bsqDepto As Boolean
 
 Public Function BusqDepto(ByRef strCodDepto As String, ByRef strDescDepto As String) As Boolean
        
-    On Error GoTo ControlError
-    
-        Set dtgDeptoAct.DataSource = Nothing
-        bsqDepto = False
-        Me.Show vbModal
-        If bsqDepto Then
-            If Not dtgDeptoAct.DataSource Is Nothing Then 'Grid del form busqueda
-                strCodDepto = dtgDeptoAct.Columns(0).Text
-                strDescDepto = dtgDeptoAct.Columns(1).Text
-                BusqDepto = True
-            Else
-                BusqDepto = False
-            End If
-        Else
-            BusqDepto = False
-        End If
-        
-    Exit Function
+1000   On Error GoTo ControlError
+       
+1010   Set dtgDeptoAct.DataSource = Nothing
+1020   bsqDepto = False
+1030   Me.Show vbModal
+1040   If bsqDepto Then
+1050      If Not dtgDeptoAct.DataSource Is Nothing Then 'Grid del form busqueda
+1070         strCodDepto = dtgDeptoAct.Columns(0).Text
+1080         strDescDepto = dtgDeptoAct.Columns(1).Text
+1090         BusqDepto = True
+1100      Else
+1110         BusqDepto = False
+1120      End If
+1130   Else
+1140      BusqDepto = False
+1150   End If
+       
+1160   Exit Function
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1170   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-          
+       
 End Function
 
 Private Sub btnBsqAceptar_Click()
-On Error GoTo ControlError
-    bsqDepto = True
-    Me.Hide
+100   On Error GoTo ControlError
+110   bsqDepto = True
+120   Me.Hide
 ExitProc:
-Exit Sub
+130   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
-          ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+140   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+         ". Descripción del error: " & Err.Description, vbCritical, App.Title
+150   Resume ExitProc
 End Sub
 
 Private Sub btnBusqDepto_Click()
-
-Dim rsBusqDepto As ADODB.Recordset
-    
-    On Error GoTo ControlError
-'    CodPais = TraerPaisDesc(txtDescPais.Text)
-    If Len(Me.txtDescDepto.Text) > 0 Then
-        Set rsBusqDepto = TraerDeptoDesc(CodPais, txtDescDepto.Text)
-            If rsBusqDepto.RecordCount > 0 Then
-                Set dtgDeptoAct.DataSource = rsBusqDepto
-                dtgDeptoAct.Columns("Codigo").Width = 900
-                dtgDeptoAct.Columns("Nombre").Width = 2300
-                dtgDeptoAct.Columns("Estado").Width = 800
-                dtgDeptoAct.Columns("Observaciones").Width = 1300
-            Else
-                Set dtgDeptoAct.DataSource = Nothing
-                Me.txtDescDepto.SelStart = 0
-                Me.txtDescDepto.SelLength = Len(Me.txtDescDepto.Text)
-                MsgBox "El departamento no existe o está inactivo", vbOKOnly, "Buscar Departamento"
-'                Cancel
-                Exit Sub
-            End If
-    Else
-         MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
-         Me.txtDescDepto.SetFocus
-         Set dtgDeptoAct.DataSource = Nothing
-'         Cancel = True
-         Exit Sub
-    End If
-    
+       
+       Dim rsBusqDepto As ADODB.Recordset
+       Dim CodPais As String
+       
+1000   On Error GoTo ControlError
+1010   CodPais = TraerPaisDesc(frmDepto.txtDesPais.Text)
+1020   If Len(Me.txtDescDepto.Text) > 0 Then
+1030      Set rsBusqDepto = TraerDeptoDesc(CodPais, txtDescDepto.Text)
+1040      If rsBusqDepto.RecordCount > 0 Then
+1050         Set dtgDeptoAct.DataSource = rsBusqDepto
+1060         dtgDeptoAct.Columns("Codigo").Width = 900
+1070         dtgDeptoAct.Columns("Nombre").Width = 2300
+1080         dtgDeptoAct.Columns("Estado").Width = 800
+1090         dtgDeptoAct.Columns("Observaciones").Width = 1300
+1100      Else
+1110         Set dtgDeptoAct.DataSource = Nothing
+1120         Me.txtDescDepto.SelStart = 0
+1130         Me.txtDescDepto.SelLength = Len(Me.txtDescDepto.Text)
+1140         MsgBox "El departamento no existe o está inactivo", vbOKOnly, "Buscar Departamento"
+             '                Cancel
+1150         Exit Sub
+1160      End If
+1170   Else
+1180      MsgBox "Debe ingresar un criterio para realizar la busqueda.", vbOKOnly, "Criterio Inválido"
+1190      Me.txtDescDepto.SetFocus
+1200      Set dtgDeptoAct.DataSource = Nothing
+          '         Cancel = True
+1210      Exit Sub
+1220   End If
+       
 ExitProc:
-Exit Sub
+1230   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+1240   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
           ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+1250   Resume ExitProc
 End Sub
 
 Private Sub dtgDeptoAct_DblClick()
-On Error GoTo ControlError
-    bsqDepto = True
-    Me.Hide
+100   On Error GoTo ControlError
+110   bsqDepto = True
+120   Me.Hide
 ExitProc:
-Exit Sub
+130   Exit Sub
 ControlError:
-MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
-          ". Descripción del error: " & Err.Description, vbCritical, App.Title
-Resume ExitProc
+140   MsgBox "Ha ocurrido un error en la aplicación." & vbLf & vbLf & "Error: " & CStr(Err.Number) & _
+         ". Descripción del error: " & Err.Description, vbCritical, App.Title
+150   Resume ExitProc
 End Sub
 
