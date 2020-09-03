@@ -1,6 +1,6 @@
 frmUsuarios = 44, 44, 837, 490, C, 22, 22, 815, 468, C
 mod_Conexion = 0, 0, 750, 446, 
-mod_Declaraciones = 66, 66, 816, 512, C
+mod_Declaraciones = 66, 66, 816, 512, 
 frmLogin = 176, 176, 934, 630, , 88, 88, 846, 542, C
 frmPrincipal = 0, 0, 0, 0, C, 22, 22, 780, 476, C
 frmTipoDoc = 132, 132, 859, 560, C, 0, 0, 727, 454, C
